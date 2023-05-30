@@ -6,7 +6,22 @@ import SignUp from './routes/SignUp'
 import Account from './routes/Account'
 import Home from './routes/Home'
 import { Routes,Route } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
 const App = () => {
+const [user,setUser]=useState(null)
+const [isLoading,setIsLoading] = useState(false)
+
+useEffect(() => {
+  const listen=onAuthStateChanged(auth,(user)=>{
+    console.log(user)
+    if(user){
+      setUser(user)
+    }else{
+      setUser(null)
+    }
+  })
+},[])
+
   const handleLogout = async () => {
     try {
       await auth.signOut();
@@ -20,21 +35,22 @@ const App = () => {
 
 
 
+
   return (
     <>
     <div className='font-bold flex items-center justify-between bg-black text-white p-6'>
       <h1>Multimart</h1>
        <div className='flex cursor-pointer'>
         <Link to='/signin'>
-          {!auth?.currentUser?.email  &&  <p className='mx-6'>sign in</p>}
+          {!user  &&  <p className='mx-6'>sign in</p>}
         </Link>
         <Link to="/signup">
-         {!auth?.currentUser?.email && <p>sign up</p>}       
+         {!user && <p>sign up</p>}       
  </Link>
         <Link to="/account">
-         {auth?.currentUser?.email && <p className='mx-4'>account </p>}       
+         {user && <p className='mx-4'>account </p>}       
  </Link>
-         {auth?.currentUser?.email && <p onClick={handleLogout}>log out </p>}       
+         {user && <p onClick={handleLogout}>log out </p>}       
  
        </div>
     </div>
