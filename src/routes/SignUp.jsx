@@ -29,6 +29,8 @@ const handleSubmit = async (e) => {
         <div className='flex flex-col'>
             <input className='w-1/4 p-2 bg-blue text-black-400 my-6 border border-input rounded-2xl' type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='enter your email'  />
             <input className='w-1/4 p-2 bg-blue text-black-400 my-6 border border-input rounded-2xl' type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='enter your password' />
+            <p className='mt-3 mb-2'>add your profile image</p>
+            <input type="file"  />
         </div>
             <button className='bg-black text-white font-bold p-3 rounded-md m-5'>Sign up</button>
     </form>

@@ -12,7 +12,7 @@ const [user,setUser]=useState(null)
 const [isLoading,setIsLoading] = useState(false)
 
 useEffect(() => {
-  const listen=onAuthStateChanged(auth,(user)=>{
+  onAuthStateChanged(auth,(user)=>{
     console.log(user)
     if(user){
       setUser(user)
@@ -32,7 +32,6 @@ useEffect(() => {
     }
     // setUserLogout(true)
   };
-
 
 
 
