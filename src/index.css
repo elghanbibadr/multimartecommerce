@@ -6,3 +6,7 @@ body{
     font-family: 'Montserrat', sans-serif;
 font-family: 'Poppins', sans-serif;
 }
+
+img{
+    cursor: pointer;
+}
