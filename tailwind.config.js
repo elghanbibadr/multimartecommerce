@@ -14,7 +14,7 @@ export default {
         primarycolor: '#0a1d37',
         herobg: '#d6e5fb',
         smalltextcolor: '#999',
-        headingtextcolor: '#0a1d37';
+        headingtextcolor: '#0a1d37',
 
       }
     },
