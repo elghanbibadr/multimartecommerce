@@ -12,7 +12,7 @@ export const AppContextProvider = ({ children }) => {
                 const querySnapshot = await getDocs(collection(db, 'products'));
                 const fetchedProducts = querySnapshot.docs.map((doc) => ({
                     id: doc.id,
-                    data: doc.data(),
+                    item: doc.data(),
                 }));
                 setProducts(fetchedProducts);
             } catch (error) {
@@ -26,7 +26,6 @@ export const AppContextProvider = ({ children }) => {
 
 
 
-    console.log(products)
     const value = {
         products,
         setProducts
