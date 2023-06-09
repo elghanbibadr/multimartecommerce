@@ -7,14 +7,20 @@ const TrendingProducts = () => {
 
   useEffect(() => {
     if (products.length > 0) {
-      const filteredProducts = products.filter(({ item }) => item.category === 'watch');
+      const filteredProducts = products.filter(({ item }) => item.category === 'sofa');
       setTrendingProducts(filteredProducts);
     }
   }, [products]);
 
   console.log(trendingProducts);
-
-  return <div>TrendingProducts</div>;
+  
+  return(
+    <>
+    {trendingProducts.length > 0 &&  <div>
+      <h1 className='text-black'>hello</h1>
+   </div>}
+    </>
+  )
 };
 
 export default TrendingProducts;
