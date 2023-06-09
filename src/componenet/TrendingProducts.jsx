@@ -1,23 +1,10 @@
-import React, { useEffect } from 'react'
-import { db } from '../../firebaseConfig'
-import { getDocs,collection} from 'firebase/firestore'
+import React, { useContext, useEffect } from 'react'
+
+import { AppContext } from '../Store/AppContext'
 const TrendingProducts = () => {
-    const retrieveProducts = async () => {
-        try {
-          const querySnapshot = await getDocs(collection(db, 'products'));
-          querySnapshot.forEach((doc) => {
-            console.log('Product ID:', doc.id);
-            console.log('Product data:', doc.data());
-          });
-        } catch (error) {
-          console.error('Error retrieving products:', error);
-        }
-      };
- // let's fetch the trending products from firebase
- 
- useEffect(() =>{
-   return () => retrieveProducts()
- },[])
+  const {products}=useContext(AppContext)
+
+  console.log(products)
   return (
     <div>TrendingProducts</div>
   )
