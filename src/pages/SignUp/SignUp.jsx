@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {  collection, addDoc } from 'firebase/firestore';
+import { db,auth } from '../../../firebaseConfig';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -25,6 +28,7 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform form submission logic here
+
     console.log('Form submitted!');
   };
 

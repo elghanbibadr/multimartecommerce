@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 
 // Create a Firestore instance
 export const db = getFirestore(app);
-
+export const auth= getAuth(app)
 
 console.log(db)
 
