@@ -18,7 +18,7 @@ const TrendingProducts = () => {
 
   return (
     <>
-      {trendingProducts.length > 0 && <Container className='sm:grid sm:grid-cols-2 md:gap-3'>
+      {trendingProducts.length > 0 && <Container className='sm:grid sm:grid-cols-2 md:gap-3 lg:grid-cols-4'>
         {trendingProducts.length > 0 && trendingProducts.map(({ id, item }) => {
           return <ProductItem key={id}
             category={item.category}
