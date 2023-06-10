@@ -46,9 +46,15 @@ const Navbar = () => {
              <img onClick={handleMenuCollapse} className='h-5 md:hidden ' src={hamburgermenu} alt="user icon" />
             </div>
              { menuCollapse &&  <ul className='w-full font-medium md:max-w-[240px] md:order-2 md:flex md:justify-between text-primarycolor  '>
-                <li className='cursor-pointer'>Home</li>
-                <li className='cursor-pointer'>Shop</li>
-                <li className='cursor-pointer'>Cart</li>
+                <Link to="/home">
+                  <li className='cursor-pointer'>Home</li>
+                </Link>
+                <Link to="/shop">
+                  <li className='cursor-pointer'>Shop</li>
+                </Link>
+                <Link to="/cart">
+                  <li className='cursor-pointer'>Cart</li>
+                </Link>
             </ul>}
             </nav>
         </Container>
