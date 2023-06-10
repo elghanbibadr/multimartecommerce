@@ -1,10 +1,14 @@
 import React from 'react'
 import item from "../../data/images/arm-chair-01.jpg"
 
-const ProductItem = ({category,productName,imgUrl}) => {
+const ProductItem = ({category,productName,imgUrl,price}) => {
+  
+  
   return (
-    <div className='w-[300px]'>
-        <img className=' w-full' src={item} alt="product image" />
+    <>
+    
+    {productName && <div className='w-[300px]'>
+        <img className=' w-full' src={imgUrl} alt="product image" />
         <h3 className='text-primarycolor text-[1.2rem] font-semibold'>{productName}</h3>
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
         <div className='flex justify-between'>
@@ -14,7 +18,11 @@ const ProductItem = ({category,productName,imgUrl}) => {
             </div>
         </div>
     </div>
+    
+  }
+    </>
   )
+  
 }
 
 export default ProductItem

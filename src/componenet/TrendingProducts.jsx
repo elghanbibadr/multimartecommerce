@@ -14,10 +14,20 @@ const TrendingProducts = () => {
   }, [products]);
 
   console.log(trendingProducts);
-  
-  return(
+
+  return (
     <>
-    {trendingProducts.length > 0 &&  <ProductItem /> }
+      {trendingProducts.length > 0 && <div>
+        {console.log(trendingProducts.slice(0, 4))}
+        {trendingProducts.length > 0 && trendingProducts.map(({ id, item }) => {
+          return <ProductItem key={id}
+            category={item.category}
+            productName={item.productName}
+            price={item.price}
+            imgUrl={item.imgUrl}
+          />
+        })}
+      </div>}
     </>
   )
 };
