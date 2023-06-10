@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react'
-import Navbar from './componenet/Navbar'
-import { db } from '../firebaseConfig';
-import TrendingProducts from './componenet/TrendingProducts'; 
-import Hero from './componenet/Hero'
-import ProductItem from './componenet/UI/ProductItem';
-import Features from './componenet/Features'
-
+import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import SignUp from './pages/SignUp/SignUp';
 const App = () => {
   return (
-    <>
-    <Navbar/>
-    <Hero/>
-    <Features />
-    <TrendingProducts />
-    <ProductItem />
-    </>
+    
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/contact" component={Contact} /> */}
+        </Routes>
   )
 }
 

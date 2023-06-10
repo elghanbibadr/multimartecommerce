@@ -1,10 +1,12 @@
 import React, { useState ,useEffect} from 'react'
 import bagShoppingLogo from "../assets/bag.png"
 import heartIcon from "../assets/heart-solid.svg"
+import { Link } from 'react-router-dom'
 import cartIcon from "../assets/bag-shopping-solid.svg"
 import Container from './UI/Container'
 import userIcon from "../assets/user-icon.png"
 import hamburgermenu from "../assets/hamburgermenu.svg"
+
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
     const handleMenuCollapse=() => {
@@ -38,7 +40,9 @@ const Navbar = () => {
             <div className='flex items-center  md:order-3 justify-between w-1/3 md:w-[130px]'>
              <img className='h-5' src={heartIcon} alt="heart icon" />
              <img className='h-5 ' src={cartIcon} alt="cart icon" />
-             <img className='h-6' src={userIcon} alt="user icon" />
+             <Link to="/signup">
+             <img  className='h-6' src={userIcon} alt="user icon" />
+             </Link>
              <img onClick={handleMenuCollapse} className='h-5 md:hidden ' src={hamburgermenu} alt="user icon" />
             </div>
              { menuCollapse &&  <ul className='w-full font-medium md:max-w-[240px] md:order-2 md:flex md:justify-between text-primarycolor  '>
