@@ -49,7 +49,7 @@ const Navbar = () => {
              <div className='relative'>
                <img onClick={handleUserProfilImgClicked}  className='h-6 ' src={userIcon} alt="user icon" />
               { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
-                {!user &&  <p>login</p>}
+                {!user &&  <Link to="/login"><p>login</p></Link>}
                {!user &&  <Link to="/signup"><p>sign up</p> </Link>}
                 {user &&  <p>logout</p>}
                 <p>dashboard</p>
