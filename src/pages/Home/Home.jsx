@@ -7,7 +7,6 @@ import Features from "../../componenet/Features";
 const Home = () => {
   return (
     <>
-     <Navbar/>
     <Hero/>
     <Features />
     <TrendingProducts />
