@@ -10,3 +10,9 @@ font-family: 'Poppins', sans-serif;
 img{
     cursor: pointer;
 }
+
+@layer components{
+    input {
+        @apply  p-2 rounded-md w-[80%] mb-3
+    }
+}

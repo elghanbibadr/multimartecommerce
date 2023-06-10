@@ -29,10 +29,11 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Create an Account</h2>
-      <form onSubmit={handleSubmit}>
+    <div className='mx-auto mt-20 w-[80%]'>
+      <h2 className='text-3xl text-center mb-6 font-semibold text-primarycolor' >Signup</h2>
+      <form className='bg-primarycolor flex flex-col items-center  text-white p-10' onSubmit={handleSubmit}>
         <input
+         
           type="text"
           placeholder="Username"
           value={username}
@@ -59,8 +60,8 @@ const SignUp = () => {
         />
         <br />
         <button type="submit">Create an Account</button>
-      </form>
       <p>Already have an account? Login</p>
+      </form>
     </div>
   );
 };
