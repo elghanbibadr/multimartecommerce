@@ -25,10 +25,26 @@ const SignUp = () => {
     setProfilePhoto(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Perform form submission logic here
-
+            try {
+          const { user } = await createUserWithEmailAndPassword(auth, email, password);
+          // User sign up successful
+          console.log('User signed up:', user.uid);
+          // Add user to Firestore collection
+          const usersCollection = collection(db, 'users');
+          await addDoc(usersCollection, {
+            uid: user.uid,
+            email: user.email,
+          });
+      
+          // User added to Firestore collection
+          console.log('User added to Firestore:', user.uid);
+        } catch (error) {
+          // Handle sign-up error
+          console.error('Error signing up:', error.message);
+        }
     console.log('Form submitted!');
   };
 
@@ -63,7 +79,7 @@ const SignUp = () => {
           onChange={handleProfilePhotoChange}
         />
         <br />
-        <button type="submit">Create an Account</button>
+        <button className='bg-white py-2 px-4 mb-6 font-medium rounded-md text-primarycolor' type="submit">Create an Account</button>
       <p>Already have an account? Login</p>
       </form>
     </div>
