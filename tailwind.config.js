@@ -16,6 +16,10 @@ export default {
         smalltextcolor: '#999',
         headingtextcolor: '#0a1d37',
 
+      },
+      screens: {
+        'sm': '500px',
+        // => @media (min-width: 640px) { ... }
       }
     },
   },
