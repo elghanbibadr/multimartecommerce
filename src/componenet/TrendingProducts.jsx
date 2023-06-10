@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../Store/AppContext';
+import ProductItem from './UI/ProductItem';
 
 const TrendingProducts = () => {
   const { products } = useContext(AppContext);
@@ -16,9 +17,7 @@ const TrendingProducts = () => {
   
   return(
     <>
-    {trendingProducts.length > 0 &&  <div>
-      <h1 className='text-black'>hello</h1>
-   </div>}
+    {trendingProducts.length > 0 &&  <ProductItem /> }
     </>
   )
 };
