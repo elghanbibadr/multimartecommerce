@@ -1,9 +1,11 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect, useContext} from 'react'
 import { auth } from '../../../firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword ,onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../Store/AppContext';
 
 const Login = () => {
+    const {setUser}=useContext(AppContext)
     const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
@@ -22,6 +24,7 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    console.log("submited")
     try {
       await signInWithEmailAndPassword(auth, email, password);
       // User login successful
@@ -34,6 +37,18 @@ const Login = () => {
         navigate("/")
     }
   };
+
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        console.log(user)
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
 
     return (
