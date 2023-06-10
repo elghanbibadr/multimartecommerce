@@ -2,7 +2,6 @@ import React from 'react'
 import trackIcon from "../../assets/tracking.png"
 
 const FeatureCard = ({title,subtitle,bg}) => {
-  {console.log(bg)}
   return (
   
       <div  className={`flex items-center  mx-auto rounded-lg mt-3 h-fit p-3 `} style={{ backgroundColor: bg }}>

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import {  createUserWithEmailAndPassword } from 'firebase/auth';
 import {  collection, addDoc } from 'firebase/firestore';
 import { db,auth } from '../../../firebaseConfig';
+import { AppContext } from '../../Store/AppContext';
 import { useNavigate } from 'react-router-dom';
+
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
+  const {user,setUser}=useContext(AppContext)
+
   const navigate = useNavigate();
 
 
@@ -28,12 +32,13 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (event) => {
+    console.log("user name: " + username)
     event.preventDefault();
     // Perform form submission logic here
             try {
           const { user } = await createUserWithEmailAndPassword(auth, email, password);
-          console.log(user)
           // User sign up successful
+          setUser({id:user.id, username: username, email: email})
           console.log('User signed up:', user.uid);
           // Add user to Firestore collection
           const usersCollection = collection(db, 'users');
@@ -43,14 +48,13 @@ const SignUp = () => {
           });
       
           // User added to Firestore collection
-          console.log('User added to Firestore:', user.uid);
+          console.log('User added to Firestore:',user.uid);
         } catch (error) {
           // Handle sign-up error
           console.error('Error signing up:', error.message);
         }finally{
-          navigate('/home')
+          navigate('/')
         }
-    console.log('Form submitted!');
   };
 
   return (

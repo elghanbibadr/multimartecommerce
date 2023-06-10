@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState ,useEffect, useContext} from 'react'
 import bagShoppingLogo from "../assets/bag.png"
 import heartIcon from "../assets/heart-solid.svg"
 import { Link } from 'react-router-dom'
@@ -6,10 +6,13 @@ import cartIcon from "../assets/bag-shopping-solid.svg"
 import Container from './UI/Container'
 import userIcon from "../assets/user-icon.png"
 import hamburgermenu from "../assets/hamburgermenu.svg"
+import { AppContext } from '../Store/AppContext'
 
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
+    const {user}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
+
     const handleMenuCollapse=() => {
      setMenuCollapse(prv => !prv)
     }
@@ -44,12 +47,11 @@ const Navbar = () => {
              <img className='h-5' src={heartIcon} alt="heart icon" />
              <img className='h-5 ' src={cartIcon} alt="cart icon" />
              <div className='relative'>
-               <Link to="/signup">
                <img onClick={handleUserProfilImgClicked}  className='h-6 ' src={userIcon} alt="user icon" />
-               </Link>
-              { userClickOnProfileIcon &&  <div className='bg-cardbg01 p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
-                <p>login</p>
-                <p>sign up</p>
+              { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
+                {!user &&  <p>login</p>}
+               {!user &&  <Link to="/signup"><p>sign up</p> </Link>}
+                {user &&  <p>logout</p>}
                 <p>dashboard</p>
                </div>}
              </div>

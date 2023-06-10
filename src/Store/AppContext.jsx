@@ -7,6 +7,7 @@ export const AppContext = createContext(null);
 export const AppContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     const [user,setUser]=useState()
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -23,9 +24,7 @@ export const AppContextProvider = ({ children }) => {
 
         fetchData();
     }, []);
-
-
-
+console.log(user)
 
     const value = {
         products,

@@ -14,7 +14,6 @@ const TrendingProducts = () => {
     }
   }, [products]);
 
-  console.log(trendingProducts);
 
   return (
     <>
