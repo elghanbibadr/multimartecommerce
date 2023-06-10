@@ -58,7 +58,7 @@ const Navbar = () => {
              <img onClick={handleMenuCollapse} className='h-5 md:hidden ' src={hamburgermenu} alt="user icon" />
             </div>
              { menuCollapse &&  <ul className='w-full font-medium md:max-w-[240px] md:order-2 md:flex md:justify-between text-primarycolor  '>
-                <Link to="/home">
+                <Link to="/">
                   <li className='cursor-pointer'>Home</li>
                 </Link>
                 <Link to="/shop">

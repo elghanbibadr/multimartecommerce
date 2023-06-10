@@ -38,7 +38,7 @@ const SignUp = () => {
             try {
           const { user } = await createUserWithEmailAndPassword(auth, email, password);
           // User sign up successful
-          setUser({id:user.id, username: username, email: email})
+          setUser({id:user.uid, username: username, email: email})
           console.log('User signed up:', user.uid);
           // Add user to Firestore collection
           const usersCollection = collection(db, 'users');
