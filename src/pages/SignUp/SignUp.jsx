@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import {  createUserWithEmailAndPassword } from 'firebase/auth';
 import {  collection, addDoc } from 'firebase/firestore';
 import { db,auth } from '../../../firebaseConfig';
-
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
+  const navigate = useNavigate();
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -30,6 +32,7 @@ const SignUp = () => {
     // Perform form submission logic here
             try {
           const { user } = await createUserWithEmailAndPassword(auth, email, password);
+          console.log(user)
           // User sign up successful
           console.log('User signed up:', user.uid);
           // Add user to Firestore collection
@@ -44,6 +47,8 @@ const SignUp = () => {
         } catch (error) {
           // Handle sign-up error
           console.error('Error signing up:', error.message);
+        }finally{
+          navigate('/home')
         }
     console.log('Form submitted!');
   };

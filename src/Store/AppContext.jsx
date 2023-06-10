@@ -6,6 +6,7 @@ export const AppContext = createContext(null);
 
 export const AppContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
+    const [user,setUser]=useState()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,7 +29,9 @@ export const AppContextProvider = ({ children }) => {
 
     const value = {
         products,
-        setProducts
+        setProducts,
+        user,
+        setUser
     }
 
     return <AppContext.Provider value={value} >{children}</AppContext.Provider>
