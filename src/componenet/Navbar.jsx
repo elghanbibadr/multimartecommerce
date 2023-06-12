@@ -49,8 +49,8 @@ const Navbar = () => {
              <img className='h-5' src={heartIcon} alt="heart icon" />
              <img className='h-5 ' src={cartIcon} alt="cart icon" />
              <div className='relative'>
-{        <img onClick={handleUserProfilImgClicked}  className='h-6 ' src={userIcon} alt="user icon" />}  
-             {user && <img className='h-10' src={imageUrl} />}
+          <img onClick={handleUserProfilImgClicked}  className='h-6 rounded-full w-6' src={!user ? userIcon :imageUrl} alt="user icon" />
+             {/* {user && <img className='h-6 rounded-full w-6' src={imageUrl} />} */}
               { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
                 {!user &&  <Link to="/login"><p>login</p></Link>}
                {!user &&  <Link to="/signup"><p>sign up</p> </Link>}
