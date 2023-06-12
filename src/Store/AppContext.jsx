@@ -2,14 +2,10 @@ import { createContext, useState, useEffect } from "react";
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { getDownloadURL } from "firebase/storage";
 import { db } from '../../firebaseConfig'
-import { getDocs, collection ,doc,setDoc,getDoc,where,query} from 'firebase/firestore'
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+import { getDocs, collection ,doc,setDoc,getDoc,where,query} from 'firebase/firestore'
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "firebase/auth";
+
 
 export const AppContext = createContext(null);
 
@@ -43,7 +39,6 @@ export const AppContextProvider = ({ children }) => {
     const storageRef = ref(storage, `profileImages/${userCredential.user.uid}`);
     await uploadBytes(storageRef, profilePhoto);
 
-    console.log('Image uploaded successfully');
 
     // Get the download URL of the uploaded image
     const imageUrl = await getDownloadURL(storageRef);
@@ -73,9 +68,7 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log(currentUser.uid);
         setUser(currentUser);
-        console.log(currentUser);
   
         // Search for user info in Firestore
         const userRef = collection(db, 'users');
@@ -84,12 +77,11 @@ export const AppContextProvider = ({ children }) => {
         if (querySnapshot.size > 0) {
           // User info found
           querySnapshot.forEach((doc) => {
-            console.log(doc.id, ' => ', doc.data());
             setImageUrl(doc.data().profilePhotoUrl);
           });
         } else {
           // User info not found
-          console.log('User info not found in Firestore');
+          alert('User info not found in the database');
         }
       } else {
         // User is signed out
@@ -102,40 +94,7 @@ export const AppContextProvider = ({ children }) => {
     };
   }, []);
   
-  // Inside your AppContextProvider component
-
-// useEffect(() => {
-//   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-//     setUser(currentUser);
-
-//     if (currentUser) {
-//       // User is logged in
-//       const userRef = doc(db, 'users', currentUser.uid);
-//       const userSnapshot = await getDoc(userRef);
-
-//       if (userSnapshot.exists()) {
-//         // User document exists in Firestore
-//         const userData = userSnapshot.data();
-//         // Do something with the user data, e.g., set it to the user state
-//         setUser((prevUser) => ({
-//           ...prevUser,
-//           name: userData.name,
-//           email: userData.email,
-//           profilePhotoUrl: userData.profilePhotoUrl,
-//         }));
-//       }
-//     } else {
-//       // User is logged out
-//       // Clear the user state or perform any other necessary actions
-//       setUser({});
-//     }
-//   });
-
-//   return () => {
-//     unsubscribe();
-//   };
-// }, []);
-
+ 
 
   const value = {
     products,

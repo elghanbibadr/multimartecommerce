@@ -12,7 +12,6 @@ const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
     const {user,logout,imageUrl}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
-    console.log(imageUrl)
 
     const handleLogout= () => logout()
     const handleMenuCollapse=() => {
