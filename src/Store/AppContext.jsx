@@ -47,6 +47,7 @@ export const AppContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+  
 console.log(user)
 
     const value = {

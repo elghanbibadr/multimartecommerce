@@ -1,15 +1,13 @@
 import React ,{useState,useEffect, useContext} from 'react'
-import { auth } from '../../../firebaseConfig';
-import { signInWithEmailAndPassword ,onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Store/AppContext';
 
 const Login = () => {
-    const {setUser}=useContext(AppContext)
+    const {signIn}=useContext(AppContext)
     const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-
- const navigate=useNavigate()
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const navigate=useNavigate()
 
 
   const handlePasswordChange = (event) => {
@@ -20,35 +18,18 @@ const Login = () => {
     setEmail(event.target.value);
   };
 
-
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    console.log("submited")
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('')
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // User login successful
-      console.log('User logged in');
-      // Redirect to dashboard or desired route
-    } catch (error) {
-      // Handle login error
-      console.error('Error logging in:', error.message);
-    }finally{
-        navigate("/")
+      await signIn(email, password)
+      navigate('/')
+    } catch (e) {
+      setError(e.message)
+      console.log(e.message)
     }
   };
 
-  
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-        console.log(user)
-      setUser(user);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
 
 
     return (
