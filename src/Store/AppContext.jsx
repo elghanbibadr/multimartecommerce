@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { getDownloadURL } from "firebase/storage";
 import { db } from '../../firebaseConfig'
-import { getDocs, collection ,doc,setDoc} from 'firebase/firestore'
+import { getDocs, collection ,doc,setDoc,getDoc,where,query} from 'firebase/firestore'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -54,6 +54,7 @@ export const AppContextProvider = ({ children }) => {
     // Store the user in Firebase Firestore
     const userRef = doc(db, 'users', userCredential.user.uid);
     await setDoc(userRef, {
+      uid:userCredential.user.uid,
       name: userCredential.user.displayName,
       email: userCredential.user.email,
       profilePhotoUrl: imageUrl,
@@ -71,14 +72,71 @@ export const AppContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        console.log(currentUser.uid);
+        setUser(currentUser);
+        console.log(currentUser);
+  
+        // Search for user info in Firestore
+        const userRef = collection(db, 'users');
+        const querySnapshot = await getDocs(query(userRef, where('uid', '==', currentUser.uid)));
+  
+        if (querySnapshot.size > 0) {
+          // User info found
+          querySnapshot.forEach((doc) => {
+            console.log(doc.id, ' => ', doc.data());
+            setImageUrl(doc.data().profilePhotoUrl);
+          });
+        } else {
+          // User info not found
+          console.log('User info not found in Firestore');
+        }
+      } else {
+        // User is signed out
+        setUser(null);
+      }
     });
+  
     return () => {
       unsubscribe();
     };
   }, []);
+  
+  // Inside your AppContextProvider component
+
+// useEffect(() => {
+//   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//     setUser(currentUser);
+
+//     if (currentUser) {
+//       // User is logged in
+//       const userRef = doc(db, 'users', currentUser.uid);
+//       const userSnapshot = await getDoc(userRef);
+
+//       if (userSnapshot.exists()) {
+//         // User document exists in Firestore
+//         const userData = userSnapshot.data();
+//         // Do something with the user data, e.g., set it to the user state
+//         setUser((prevUser) => ({
+//           ...prevUser,
+//           name: userData.name,
+//           email: userData.email,
+//           profilePhotoUrl: userData.profilePhotoUrl,
+//         }));
+//       }
+//     } else {
+//       // User is logged out
+//       // Clear the user state or perform any other necessary actions
+//       setUser({});
+//     }
+//   });
+
+//   return () => {
+//     unsubscribe();
+//   };
+// }, []);
+
 
   const value = {
     products,
