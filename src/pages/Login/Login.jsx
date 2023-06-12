@@ -27,9 +27,10 @@ const Login = () => {
     } catch (e) {
       setError(e.message)
       alert(e.message)
-    
-
+      
+      
     }
+
   };
 
 

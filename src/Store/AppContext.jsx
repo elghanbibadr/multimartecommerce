@@ -79,9 +79,6 @@ export const AppContextProvider = ({ children }) => {
           querySnapshot.forEach((doc) => {
             setImageUrl(doc.data().profilePhotoUrl);
           });
-        } else {
-          // User info not found
-          alert('User info not found in the database');
         }
       } else {
         // User is signed out
