@@ -1,9 +1,7 @@
 import React, { useState,useContext } from 'react';
-// import {  createUserWithEmailAndPassword } from 'firebase/auth';
-// import {  collection, addDoc } from 'firebase/firestore';
-// import { db,auth } from '../../../firebaseConfig';
 import { AppContext } from '../../Store/AppContext';
 import { useNavigate } from 'react-router-dom';
+
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -31,8 +29,10 @@ const SignUp = () => {
   };
 
   const handleProfilePhotoChange = (event) => {
-    setProfilePhoto(event.target.value);
-  };
+    const file = event.target.files[0];
+    console.log(file)
+    setProfilePhoto(file);
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,6 +74,8 @@ const SignUp = () => {
         <br />
         <input
           type="file"
+          accept="image/*"
+          className='text-white'
           onChange={handleProfilePhotoChange}
         />
         <br />
