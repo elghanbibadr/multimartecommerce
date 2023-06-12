@@ -10,9 +10,10 @@ import { AppContext } from '../Store/AppContext'
 
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
-    const {user}=useContext(AppContext)
+    const {user,logout}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
 
+    const handleLogout= () => logout()
     const handleMenuCollapse=() => {
      setMenuCollapse(prv => !prv)
     }
@@ -51,7 +52,7 @@ const Navbar = () => {
               { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
                 {!user &&  <Link to="/login"><p>login</p></Link>}
                {!user &&  <Link to="/signup"><p>sign up</p> </Link>}
-                {user &&  <p>logout</p>}
+                {user &&  <p onClick={handleLogout} >logout</p>}
                 <p>dashboard</p>
                </div>}
              </div>
