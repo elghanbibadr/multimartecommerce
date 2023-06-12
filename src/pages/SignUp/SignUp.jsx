@@ -38,7 +38,7 @@ const SignUp = () => {
     e.preventDefault();
     setError('');
     try {
-      await createUser(email, password);
+      await createUser(email, password,profilePhoto);
       navigate('/')
     } catch (e) {
       setError(e.message);

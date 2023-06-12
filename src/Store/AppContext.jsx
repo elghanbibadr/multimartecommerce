@@ -1,4 +1,7 @@
 import { createContext, useState, useEffect } from "react";
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL } from "firebase/storage";
+
 import { db } from '../../firebaseConfig'
 import { getDocs, collection } from 'firebase/firestore'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "firebase/auth";
@@ -7,6 +10,7 @@ import {auth} from "../../firebaseConfig";
 export const AppContext = createContext(null);
 export const AppContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
+    const [imageUrl, setImageUrl] = useState('');
     const [user,setUser]=useState({})
 
     useEffect(() => {
@@ -26,8 +30,20 @@ export const AppContextProvider = ({ children }) => {
         fetchData();
     }, []);
     
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser = async(email, password,profilePhoto) => {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+    const storage = getStorage();
+      const storageRef = ref(storage, `profileImages/${userCredential.user.uid}`);
+      await uploadBytes(storageRef, profilePhoto);
+      
+      console.log('Image uploaded successfully');
+      
+      // Get the download URL of the uploaded image
+      const imageUrl = await getDownloadURL(storageRef);
+      setImageUrl(imageUrl);
+      
+      console.log('Image download URL:', imageUrl);
   };
 
    const signIn = (email, password) =>  {
@@ -55,7 +71,8 @@ export const AppContextProvider = ({ children }) => {
         setUser,
         createUser,
         signIn,
-        logout
+        logout,
+        imageUrl
     }
 
     return <AppContext.Provider value={value} >{children}</AppContext.Provider>

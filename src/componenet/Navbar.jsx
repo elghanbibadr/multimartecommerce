@@ -10,8 +10,9 @@ import { AppContext } from '../Store/AppContext'
 
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
-    const {user,logout}=useContext(AppContext)
+    const {user,logout,imageUrl}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
+    console.log(imageUrl)
 
     const handleLogout= () => logout()
     const handleMenuCollapse=() => {
@@ -48,7 +49,7 @@ const Navbar = () => {
              <img className='h-5' src={heartIcon} alt="heart icon" />
              <img className='h-5 ' src={cartIcon} alt="cart icon" />
              <div className='relative'>
-               <img onClick={handleUserProfilImgClicked}  className='h-6 ' src={userIcon} alt="user icon" />
+{          <img onClick={handleUserProfilImgClicked}  className='h-6 ' src={userIcon} alt="user icon" />}               {user && <img src={imageUrl} />}
               { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
                 {!user &&  <Link to="/login"><p>login</p></Link>}
                {!user &&  <Link to="/signup"><p>sign up</p> </Link>}
