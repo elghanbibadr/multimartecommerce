@@ -55,7 +55,6 @@ export const AppContextProvider = ({ children }) => {
     const userRef = doc(db, 'users', userCredential.user.uid);
     await setDoc(userRef, {
       uid:userCredential.user.uid,
-      name: userCredential.user.displayName,
       email: userCredential.user.email,
       profilePhotoUrl: imageUrl,
     });
