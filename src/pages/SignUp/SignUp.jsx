@@ -1,7 +1,7 @@
 import React, { useState,useContext } from 'react';
-import {  createUserWithEmailAndPassword } from 'firebase/auth';
-import {  collection, addDoc } from 'firebase/firestore';
-import { db,auth } from '../../../firebaseConfig';
+// import {  createUserWithEmailAndPassword } from 'firebase/auth';
+// import {  collection, addDoc } from 'firebase/firestore';
+// import { db,auth } from '../../../firebaseConfig';
 import { AppContext } from '../../Store/AppContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,9 @@ const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('')
+  const {createUser}=useContext(AppContext)
+
   const [profilePhoto, setProfilePhoto] = useState('');
   const {user,setUser}=useContext(AppContext)
 
@@ -31,30 +34,16 @@ const SignUp = () => {
     setProfilePhoto(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    console.log("user name: " + username)
-    event.preventDefault();
-    // Perform form submission logic here
-            try {
-          const { user } = await createUserWithEmailAndPassword(auth, email, password);
-          // User sign up successful
-          setUser({id:user.uid, username: username, email: email})
-          console.log('User signed up:', user.uid);
-          // Add user to Firestore collection
-          const usersCollection = collection(db, 'users');
-          await addDoc(usersCollection, {
-            uid: user.uid,
-            email: user.email,
-          });
-      
-          // User added to Firestore collection
-          console.log('User added to Firestore:',user.uid);
-        } catch (error) {
-          // Handle sign-up error
-          console.error('Error signing up:', error.message);
-        }finally{
-          navigate('/')
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await createUser(email, password);
+      navigate('/')
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
   };
 
   return (
