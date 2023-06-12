@@ -40,15 +40,13 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
     return () => {
       unsubscribe();
     };
   }, []);
-  
-console.log(user)
+
 
     const value = {
         products,
