@@ -4,7 +4,7 @@ import { getDoc, doc } from 'firebase/firestore';
 import { AppContext } from '../../Store/AppContext';
 
 const Cart = () => {
-  const { user } = useContext(AppContext);
+  const { user,  setItemsOnTheCart  } = useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -14,9 +14,10 @@ const Cart = () => {
         try {
           const userSnap = await getDoc(userRef);
           const userData = userSnap.data();
-          console.log(userData);
+          setItemsOnTheCart(userData.cart)
+          
         } catch (error) {
-          console.error('Error fetching user data:', error);
+          console.alert('Error fetching user data:', error);
         }
       }
     };

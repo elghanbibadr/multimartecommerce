@@ -92,7 +92,7 @@ export const AppContextProvider = ({ children }) => {
     };
   }, []);
   
- 
+ console.log(itemsOnTheCart)
 
   const value = {
     products,
