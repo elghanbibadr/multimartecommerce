@@ -6,8 +6,14 @@ import { AppContext } from '../../Store/AppContext'
 
 const ProductItem = ({category,productName,imgUrl,price}) => {
   const {user}=useContext(AppContext)
+
   const handleProductAddedToCart=async(userId)=>{
-    console.log(userId)
+    console.log(user)
+    // if the user not logged in return
+    if (!user) {
+      alert('please log in to add product to cart')
+    return
+    }
     const userRef = doc(db, 'users', userId);
 
     // Get the user document from Firestore
@@ -32,7 +38,7 @@ const ProductItem = ({category,productName,imgUrl,price}) => {
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
         <div className='flex justify-between items-center '>
             <h6 className='text-[1.2rem] text-primarycolor font-semibold'>${price}</h6>
-            <div onClick={()=> handleProductAddedToCart(user.uid)} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
+            <div onClick={ handleProductAddedToCart} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
                 +
             </div>
         </div>
