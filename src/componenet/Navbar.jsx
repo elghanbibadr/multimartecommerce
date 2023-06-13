@@ -10,7 +10,7 @@ import { AppContext } from '../Store/AppContext'
 
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
-    const {user,logout,imageUrl}=useContext(AppContext)
+    const {user,logout,imageUrl,itemsOnTheCart}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
 
     const handleLogout= () => logout()
@@ -41,12 +41,17 @@ const Navbar = () => {
         <Container>
             <nav className='flex justify-between flex-wrap md:flex-nowrap  items-center'>
             <div className='flex'>
-            <img className='h-5 w-5 md:w-6 md:h-6' src={bagShoppingLogo} alt='bag shopping' />
+           
+              <img className='h-5 w-5 md:w-6 md:h-6' src={bagShoppingLogo} alt='bag shopping' />
+          
             <span className='font-bold text-primarycolor text-lg mx-2'>Multimart</span>
             </div>
             <div className='flex items-center  md:order-3 justify-between w-1/3 md:w-[130px]'>
              <img className='h-5' src={heartIcon} alt="heart icon" />
-             <img className='h-5 ' src={cartIcon} alt="cart icon" />
+             <div className='relative'>
+             <span className='text-white absolute bottom-4 h-4 w-4  font-medium text-xs    inline-flex justify-center rounded-full bg-primarycolor'>{itemsOnTheCart.length}</span>
+              <img className='h-5 ' src={cartIcon} alt="cart icon" />
+              </div>
              <div className='relative'>
           <img onClick={handleUserProfilImgClicked}  className='h-6 rounded-full w-6' src={!user ? userIcon :imageUrl} alt="user icon" />
              {/* {user && <img className='h-6 rounded-full w-6' src={imageUrl} />} */}
