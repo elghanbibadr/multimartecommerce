@@ -10,7 +10,7 @@ import { AppContext } from '../Store/AppContext'
 
 const Navbar = () => {
     const [menuCollapse,setMenuCollapse] =useState(false)
-    const {user,logout,imageUrl,itemsOnTheCart}=useContext(AppContext)
+    const {user,logout,imageUrl,itemsOnTheCart,numberOfiItemsInTheCart}=useContext(AppContext)
     const [userClickOnProfileIcon,setUserClickOnProfileIcon] = useState(false)
 
     const handleLogout= () => logout()
@@ -49,7 +49,7 @@ const Navbar = () => {
             <div className='flex items-center  md:order-3 justify-between w-1/3 md:w-[130px]'>
              <img className='h-5' src={heartIcon} alt="heart icon" />
              <div className='relative'>
-             <span className='text-white absolute bottom-4 h-4 w-4  font-medium text-xs    inline-flex justify-center rounded-full bg-primarycolor'>{itemsOnTheCart.length}</span>
+             <span className='text-white absolute bottom-4 h-4 w-4  font-medium text-xs    inline-flex justify-center rounded-full bg-primarycolor'>{numberOfiItemsInTheCart}</span>
               <img className='h-5 ' src={cartIcon} alt="cart icon" />
               </div>
              <div className='relative'>

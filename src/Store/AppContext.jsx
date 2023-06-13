@@ -5,6 +5,7 @@ import { db } from '../../firebaseConfig'
 import { auth } from "../../firebaseConfig";
 import { getDocs, collection ,doc,setDoc,getDoc,where,query} from 'firebase/firestore'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "firebase/auth";
+import ItemInCart from "../pages/Cart/ItemInCart";
 
 
 export const AppContext = createContext(null);
@@ -14,6 +15,8 @@ export const AppContextProvider = ({ children }) => {
   const [itemsOnTheCart,setItemsOnTheCart] = useState([])
   const [userdelete,setuserdelete] = useState(false)
   const [imageUrl, setImageUrl] = useState()
+  const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState(itemsOnTheCart.length)
+
 
   const [user, setUser] = useState({});
 
@@ -33,6 +36,11 @@ export const AppContextProvider = ({ children }) => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setNumberOfItemsInTheCart(itemsOnTheCart.length)
+  },[itemsOnTheCart])
+
 
   const createUser = async (email, password, profilePhoto) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -108,7 +116,9 @@ export const AppContextProvider = ({ children }) => {
     itemsOnTheCart,
     setItemsOnTheCart,
     userdelete,
-    setuserdelete
+    setuserdelete,
+    numberOfiItemsInTheCart,
+    setNumberOfItemsInTheCart
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
