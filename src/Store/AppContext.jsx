@@ -63,6 +63,7 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const logout = () => {
+    setItemsOnTheCart([])
     return signOut(auth);
   };
 

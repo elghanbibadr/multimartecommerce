@@ -5,7 +5,7 @@ import { AppContext } from '../../Store/AppContext';
 import ItemInCart from './ItemInCart';
 
 const Cart = () => {
-  const { user,  setItemsOnTheCart  } = useContext(AppContext);
+  const { user,  setItemsOnTheCart,itemsOnTheCart  } = useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -27,7 +27,10 @@ const Cart = () => {
   }, [user]);
 
   return <div>
-    <ItemInCart />
+    {itemsOnTheCart && itemsOnTheCart.map(({productName,price,imgUrl},index)=>{
+      return <ItemInCart key={index} productName={productName} price={price} img={imgUrl} />
+    }) }
+    
   </div>;
 };
 
