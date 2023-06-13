@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { db } from '../../../firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 import { AppContext } from '../../Store/AppContext';
+import ItemInCart from './ItemInCart';
 
 const Cart = () => {
   const { user,  setItemsOnTheCart  } = useContext(AppContext);
@@ -25,7 +26,9 @@ const Cart = () => {
     getData();
   }, [user]);
 
-  return <div>Cart</div>;
+  return <div>
+    <ItemInCart />
+  </div>;
 };
 
 export default Cart;
