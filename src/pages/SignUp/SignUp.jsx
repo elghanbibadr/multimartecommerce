@@ -46,9 +46,7 @@ const SignUp = () => {
       setError(e.message);
       alert(e.message);
     }
-    // if (error===""){
-    //   setloading(true)
-    // }
+   
   };
 
   // console.log(error)
