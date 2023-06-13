@@ -4,9 +4,9 @@ import { db } from '../../../firebaseConfig';
 import { getDoc,doc,updateDoc } from 'firebase/firestore';
 import { AppContext } from '../../Store/AppContext';
 const ItemInCart = ({productName,price,img}) => {
-    const {user} =useContext(AppContext)
+    const {user,itemsOnTheCart,setuserdelete,  setItemsOnTheCart} =useContext(AppContext)
     const handleItemDeletedFromCart = async (userId, productName) => {
-        console.log(userId)
+        setuserdelete(true)
         const userRef = doc(db, 'users', userId);
       
         try {
@@ -21,11 +21,14 @@ const ItemInCart = ({productName,price,img}) => {
       
           // Update the user document with the modified cart array
           await updateDoc(userRef, { cart: updatedCart });
+          setItemsOnTheCart(updatedCart)
+          console.log(itemsOnTheCart)
           console.log("item deleted successfully")
         } catch (error) {
           console.error('Error deleting item from cart:', error);
         }
       };
+
 
     return (
         <table className=''>

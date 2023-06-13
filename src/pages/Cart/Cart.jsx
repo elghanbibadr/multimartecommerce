@@ -5,7 +5,7 @@ import { AppContext } from '../../Store/AppContext';
 import ItemInCart from './ItemInCart';
 
 const Cart = () => {
-  const { user,  setItemsOnTheCart,itemsOnTheCart  } = useContext(AppContext);
+  const { user,  setItemsOnTheCart,itemsOnTheCart,userdelete  } = useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {

@@ -12,6 +12,7 @@ export const AppContext = createContext(null);
 export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [itemsOnTheCart,setItemsOnTheCart] = useState([])
+  const [userdelete,setuserdelete] = useState(false)
   const [imageUrl, setImageUrl] = useState()
 
   const [user, setUser] = useState({});
@@ -105,7 +106,9 @@ export const AppContextProvider = ({ children }) => {
     logout,
     imageUrl,
     itemsOnTheCart,
-    setItemsOnTheCart
+    setItemsOnTheCart,
+    userdelete,
+    setuserdelete
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
