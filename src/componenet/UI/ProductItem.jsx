@@ -25,15 +25,23 @@ const ProductItem = ({category,productName,imgUrl,price}) => {
     // console.log(userData)
   
     // Add the item to the cart array with additional properties
-  
+    const addedProduct={productName:productName,price:price,category:category,imgUrl:imgUrl} 
   
     // Update the user document with the new cart array
-    if (userData.cart){
-      await setDoc(userRef, { email: userData.email, profilePhotoUrl: userData.profilePhotoUrl, uid: userData.uid, cart: [...userData.cart, productName]});
-    }else {
-      await setDoc(userRef, { email: userData.email, profilePhotoUrl: userData.profilePhotoUrl, uid: userData.uid, cart: [productName]});
+    // if (userData.cart){
+    //   await setDoc(userRef, { email: userData.email, profilePhotoUrl: userData.profilePhotoUrl, uid: userData.uid, cart: [...userData.cart,addedProduct]});
+    // }else {
+    //   await setDoc(userRef, { email: userData.email, profilePhotoUrl: userData.profilePhotoUrl, uid: userData.uid, cart: [addedProduct ]});
 
-    }
+    // }
+    const cart = userData.cart ? [...userData.cart, addedProduct] : [addedProduct];
+
+await setDoc(userRef, {
+  email: userData.email,
+  profilePhotoUrl: userData.profilePhotoUrl,
+  uid: userData.uid,
+  cart: cart
+});
 
     // await updateDoc(userRef, { cart: updatedCart });
   
