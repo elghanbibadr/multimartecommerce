@@ -14,11 +14,9 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [itemsOnTheCart,setItemsOnTheCart] = useState([])
   const [userdelete,setuserdelete] = useState(false)
-  const [imageUrl, setImageUrl] = useState()
+  // const [imageUrl, setImageUrl] = useState()
   const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState(itemsOnTheCart.length)
-
-
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,24 +35,16 @@ export const AppContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setNumberOfItemsInTheCart(itemsOnTheCart.length)
-  },[itemsOnTheCart])
 
-
+  // CREATE A NEW USER AND UPLOAD PROFIL IMAGE TO FIRESTORE STORAGE AND ADD A NEW DOC WITH USER DATA
   const createUser = async (email, password, profilePhoto) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
     const storage = getStorage();
     const storageRef = ref(storage, `profileImages/${userCredential.user.uid}`);
     await uploadBytes(storageRef, profilePhoto);
-
-
     // Get the download URL of the uploaded image
     const imageUrl = await getDownloadURL(storageRef);
-    setImageUrl(imageUrl);
-
-    // Store the user in firebase firestore db
 
     // Store the user in Firebase Firestore
     const userRef = doc(db, 'users', userCredential.user.uid);
@@ -67,10 +57,13 @@ export const AppContextProvider = ({ children }) => {
  
   };
 
+
+  // SIGN IN USER WITH EMAIL AND PASSWORD
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
   };
 
+  // LOGOUT USER
   const logout = () => {
     setItemsOnTheCart([])
     return signOut(auth);
@@ -79,7 +72,6 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
   
         // Search for user info in Firestore
         const userRef = collection(db, 'users');
@@ -88,8 +80,10 @@ export const AppContextProvider = ({ children }) => {
         if (querySnapshot.size > 0) {
           // User info found
           querySnapshot.forEach((doc) => {
-            setImageUrl(doc.data().profilePhotoUrl);
+            let userData = doc.data();
+            setUser(userData)
           });
+          
         }
       } else {
         // User is signed out
@@ -102,7 +96,6 @@ export const AppContextProvider = ({ children }) => {
     };
   }, []);
   
- console.log(itemsOnTheCart)
 
   const value = {
     products,
@@ -112,7 +105,6 @@ export const AppContextProvider = ({ children }) => {
     createUser,
     signIn,
     logout,
-    imageUrl,
     itemsOnTheCart,
     setItemsOnTheCart,
     userdelete,
@@ -121,6 +113,7 @@ export const AppContextProvider = ({ children }) => {
     setNumberOfItemsInTheCart
   };
 
+  console.log("user" ,user)
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

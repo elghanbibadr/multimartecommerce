@@ -34,8 +34,8 @@ const Navbar = () => {
         };
       }, []);
 
+      console.log(user)
       const handleUserProfilImgClicked=() => setUserClickOnProfileIcon(prv => !prv)
-
   return (
     <header >
         <Container>
@@ -53,8 +53,8 @@ const Navbar = () => {
               <img className='h-5 ' src={cartIcon} alt="cart icon" />
               </div>
              <div className='relative'>
-          <img onClick={handleUserProfilImgClicked}  className='h-6 rounded-full w-6' src={!user ? userIcon :imageUrl} alt="user icon" />
-             {/* {user && <img className='h-6 rounded-full w-6' src={imageUrl} />} */}
+              {console.log(user?.profilePhotoUrl)}
+              <img onClick={handleUserProfilImgClicked}  className='h-6 rounded-full w-6' src={!user ? userIcon :user?.profilePhotoUrl} alt="user icon" />
               { userClickOnProfileIcon &&  <div className='bg-cardbg01 cursor-pointer p-2 rounded-md top-10 right-2 text-sm text-primarycolor absolute'>
                 {!user &&  <Link to="/login"><p>login</p></Link>}
                {!user &&  <Link to="/signup"><p>sign up</p> </Link>}

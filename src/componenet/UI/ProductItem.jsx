@@ -20,7 +20,7 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
 
-
+   console.log(userData)
     const addedProduct = { productName: productName, price: price, category: category, imgUrl: imgUrl }
 
     // Update the user document with the new cart array
