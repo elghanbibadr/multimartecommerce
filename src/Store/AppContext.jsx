@@ -18,9 +18,15 @@ export const AppContextProvider = ({ children }) => {
 
 
   useEffect(() =>{
-    setNumberOfItemsInTheCart(user?.cart.length)
+    if (user){
+      setItemsOnTheCart(user.cart)
+      // setNumberOfItemsInTheCart(user.cart.length)
+    }
   },[user])
 
+  useEffect(() =>{
+    setNumberOfItemsInTheCart(itemsOnTheCart.length)
+  },[itemsOnTheCart])
   console.log(itemsOnTheCart)
 
   console.log()
@@ -88,7 +94,6 @@ export const AppContextProvider = ({ children }) => {
             let userData = doc.data();
             setUser(userData)
           });
-          setItemsOnTheCart(user.cart)
         }
       } else {
         // User is signed out

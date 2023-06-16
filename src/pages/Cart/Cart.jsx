@@ -30,8 +30,8 @@ const Cart = () => {
 
   return <div className='bg-red-900 h-[100px]'>
     {console.log(user)}
-    { !user.hasOwnProperty("cart")   && <h3 className='text-primarycolor text-lg'>no item added to cart</h3>}
-    { user.hasOwnProperty("cart")  && user.cart.map(({productName,price,imgUrl},index)=>{
+    { !user.hasOwnProperty("cart") && itemsOnTheCart.length === 0  && <h3 className='text-primarycolor text-lg'>no item added to cart</h3>}
+    { user.hasOwnProperty("cart")  &&  itemsOnTheCart.map(({productName,price,imgUrl},index)=>{
       return <ItemInCart  key={index} productName={productName} price={price} img={imgUrl} />
     }) }
     

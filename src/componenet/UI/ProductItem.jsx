@@ -5,7 +5,7 @@ import { doc, updateDoc, getDoc, setDoc } from 'firebase/firestore'
 import { AppContext } from '../../Store/AppContext'
 
 const ProductItem = ({ category, productName, imgUrl, price }) => {
-  const { user } = useContext(AppContext)
+  const { user, setItemsOnTheCart,itemsOnTheCart} = useContext(AppContext)
 
   const handleProductAddedToCart = async (userId) => {
     console.log(user)
@@ -14,14 +14,16 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
       alert('please log in to add product to cart')
       return
     }
+    // add product to local array
+    const addedProduct = { productName: productName, price: price, category: category, imgUrl: imgUrl }
+    setItemsOnTheCart (prv => [...prv ,addedProduct])
     const userRef = doc(db, 'users', userId);
-
+  console.log(itemsOnTheCart)
     // Get the user document from Firestore
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
 
    console.log(userData)
-    const addedProduct = { productName: productName, price: price, category: category, imgUrl: imgUrl }
 
     // Update the user document with the new cart array
     const cart = userData.cart ? [...userData.cart, addedProduct] : [addedProduct];
