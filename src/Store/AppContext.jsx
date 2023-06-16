@@ -16,6 +16,14 @@ export const AppContextProvider = ({ children }) => {
   const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState(itemsOnTheCart.length)
   const [user, setUser] = useState(undefined);
 
+
+  useEffect(() =>{
+    setNumberOfItemsInTheCart(user?.cart.length)
+  },[user])
+
+  console.log(itemsOnTheCart)
+
+  console.log()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,14 +81,14 @@ export const AppContextProvider = ({ children }) => {
         // Search for user info in Firestore  
         const userRef = collection(db, 'users');
         const querySnapshot = await getDocs(query(userRef, where('uid', '==', currentUser.uid)));
-  
+      
         if (querySnapshot.size > 0) {
           // User info found
           querySnapshot.forEach((doc) => {
             let userData = doc.data();
             setUser(userData)
           });
-          
+          setItemsOnTheCart(user.cart)
         }
       } else {
         // User is signed out
@@ -93,7 +101,7 @@ export const AppContextProvider = ({ children }) => {
     };
   }, []);
   
-
+console.log(itemsOnTheCart)
   const value = {
     products,
     setProducts,
