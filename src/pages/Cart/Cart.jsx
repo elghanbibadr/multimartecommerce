@@ -28,10 +28,11 @@ const Cart = () => {
 
 
 
+  console.log(itemsOnTheCart)
   return <div className='bg-red-900 h-[100px]'>
-    {console.log(user)}
-    { !user.hasOwnProperty("cart") && itemsOnTheCart.length === 0  && <h3 className='text-primarycolor text-lg'>no item added to cart</h3>}
-    { user.hasOwnProperty("cart")  &&  itemsOnTheCart.map(({productName,price,imgUrl},index)=>{
+    { !user &&   <h3 className='text-primarycolor text-lg'>please login to add item to cart</h3>}
+    { user &&   itemsOnTheCart.length === 0  && <h3 className='text-primarycolor text-lg'>no item added to cart</h3>}
+    { user &&    itemsOnTheCart.map(({productName,price,imgUrl},index)=>{
       return <ItemInCart  key={index} productName={productName} price={price} img={imgUrl} />
     }) }
     
