@@ -1,31 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { db } from '../../../firebaseConfig';
-import { getDoc, doc } from 'firebase/firestore';
+import React, { useContext } from 'react';
 import { AppContext } from '../../Store/AppContext';
 import ItemInCart from './ItemInCart';
 
 const Cart = () => {
-  const { user,  setItemsOnTheCart,itemsOnTheCart,userdelete  } = useContext(AppContext);
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     if (user && user.uid) {
-  //       const userRef = doc(db, 'users', user.uid);
-
-  //       try {
-  //         const userSnap = await getDoc(userRef);
-  //         const userData = userSnap.data();
-  //         setItemsOnTheCart(userData.cart)
-          
-  //       } catch (error) {
-  //         console.alert('Error fetching user data:', error);
-  //       }
-  //     }
-  //   };
-
-  //   getData();
-  // }, [user]);
-
+  const { user,itemsOnTheCart } = useContext(AppContext);
 
 
   console.log(itemsOnTheCart)
