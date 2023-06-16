@@ -22,8 +22,6 @@ const ItemInCart = ({productName,price,img}) => {
           // Update the user document with the modified cart array
           await updateDoc(userRef, { cart: updatedCart });
           setItemsOnTheCart(updatedCart)
-          console.log(itemsOnTheCart)
-          console.log("item deleted successfully")
         } catch (error) {
           console.error('Error deleting item from cart:', error);
         }
@@ -33,11 +31,13 @@ const ItemInCart = ({productName,price,img}) => {
     return (
         <table className=''>
             <thead className='flex justify-between'>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>delete</th>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>delete</th>
+                </tr>
             </thead>
             <tbody className='flex justify-between'>
             <td><img className='h-4' src={img} alt='product item' /></td>

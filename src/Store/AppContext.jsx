@@ -79,8 +79,6 @@ export const AppContextProvider = ({ children }) => {
       email: userCredential.user.email,
       profilePhotoUrl: imageUrl,
     });
-  
- 
   };
 
 
@@ -121,7 +119,6 @@ export const AppContextProvider = ({ children }) => {
     };
   }, []);
   
-console.log(itemsOnTheCart)
   const value = {
     products,
     setProducts,
@@ -138,7 +135,6 @@ console.log(itemsOnTheCart)
     setNumberOfItemsInTheCart
   };
 
-  console.log("user" ,user)
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
