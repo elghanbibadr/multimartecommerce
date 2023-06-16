@@ -13,14 +13,14 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [itemsOnTheCart,setItemsOnTheCart] = useState([])
   const [userdelete,setuserdelete] = useState(false)
-  const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState(itemsOnTheCart.length)
+  const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState()
   const [user, setUser] = useState(undefined);
 
 
   useEffect(() =>{
     if (user){
-      setItemsOnTheCart(user.cart)
-      // setNumberOfItemsInTheCart(user.cart.length)
+      setItemsOnTheCart(user.cart || [])
+       setNumberOfItemsInTheCart(itemsOnTheCart.length)
     }
   },[user])
 
