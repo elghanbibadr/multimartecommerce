@@ -7,7 +7,7 @@ import { AppContext } from '../../Store/AppContext'
 const ProductItem = ({ category, productName, imgUrl, price }) => {
   const { user, setItemsOnTheCart,itemsOnTheCart} = useContext(AppContext)
 
-  const handleProductAddedToCart = async (userId) => {
+  const handleProductAddedToCart = async () => {
     console.log(user)
     // if the user not logged in return
     if (!user) {
@@ -16,24 +16,7 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
     }
     // add product to local array
     const addedProduct = { productName: productName, price: price, category: category, imgUrl: imgUrl }
-    setItemsOnTheCart (prv => [...prv ,addedProduct])
-    const userRef = doc(db, 'users', userId);
-  console.log(itemsOnTheCart)
-    // Get the user document from Firestore
-    const userSnap = await getDoc(userRef);
-    const userData = userSnap.data();
-
-   console.log(userData)
-
-    // Update the user document with the new cart array
-    const cart = userData.cart ? [...userData.cart, addedProduct] : [addedProduct];
-
-    await setDoc(userRef, {
-      email: userData.email,
-      profilePhotoUrl: userData.profilePhotoUrl,
-      uid: userData.uid,
-      cart: cart
-    });
+    setItemsOnTheCart (prv => [...prv ,addedProduct])   
   }
 
   
@@ -46,7 +29,7 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
         <div className='flex justify-between items-center '>
           <h6 className='text-[1.2rem] text-primarycolor font-semibold'>${price}</h6>
-          <div onClick={() => handleProductAddedToCart(user.uid)} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
+          <div onClick={ handleProductAddedToCart} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
             +
           </div>
         </div>

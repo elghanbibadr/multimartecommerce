@@ -24,12 +24,26 @@ export const AppContextProvider = ({ children }) => {
     }
   },[user])
 
-  useEffect(() =>{
-    setNumberOfItemsInTheCart(itemsOnTheCart.length)
-  },[itemsOnTheCart])
-  console.log(itemsOnTheCart)
+  // update the doc when user add a new item to cart and icreare the number of item in cart
+  useEffect(() => {
+    if (user){
+      const updateCart = async () => {
+        setNumberOfItemsInTheCart(itemsOnTheCart.length);
+        const userRef = doc(db, 'users', user.uid);
+        await setDoc(userRef, {
+          email: user.email,
+          profilePhotoUrl: user.profilePhotoUrl,
+          uid: user.uid,
+          cart: itemsOnTheCart,
+        });
+    }
+    updateCart();
+    };
+  
+  }, [itemsOnTheCart]);
+  
 
-  console.log()
+// fetch our store product
   useEffect(() => {
     const fetchData = async () => {
       try {
