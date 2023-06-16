@@ -5,7 +5,6 @@ import { db } from '../../firebaseConfig'
 import { auth } from "../../firebaseConfig";
 import { getDocs, collection ,doc,setDoc,getDoc,where,query} from 'firebase/firestore'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "firebase/auth";
-import ItemInCart from "../pages/Cart/ItemInCart";
 
 
 export const AppContext = createContext(null);
@@ -14,7 +13,6 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [itemsOnTheCart,setItemsOnTheCart] = useState([])
   const [userdelete,setuserdelete] = useState(false)
-  // const [imageUrl, setImageUrl] = useState()
   const [numberOfiItemsInTheCart,setNumberOfItemsInTheCart] = useState(itemsOnTheCart.length)
   const [user, setUser] = useState(undefined);
 
@@ -65,15 +63,14 @@ export const AppContextProvider = ({ children }) => {
 
   // LOGOUT USER
   const logout = () => {
-    setItemsOnTheCart([])
+    setUser(undefined)
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-  
-        // Search for user info in Firestore
+        // Search for user info in Firestore  
         const userRef = collection(db, 'users');
         const querySnapshot = await getDocs(query(userRef, where('uid', '==', currentUser.uid)));
   
