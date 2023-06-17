@@ -24,11 +24,11 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
     <>
 
       {productName && <div className='max-w-[340px] '>
-        <img className=' w-full mb-6' src={imgUrl} alt="product image" />
-        <h3 className='text-primarycolor text-[1.2rem] font-semibold'>{productName}</h3>
+        <img className=' w-[80%]  ' src={imgUrl} alt="product image" />
+        <h3 className='text-primarycolor text-[1rem] font-medium'>{productName}</h3>
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
         <div className='flex justify-between items-center '>
-          <h6 className='text-[1.2rem] text-primarycolor font-semibold'>${price}</h6>
+          <h6 className='text-[1.1rem] text-primarycolor font-semibold'>${price}</h6>
           <div onClick={ handleProductAddedToCart} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
             +
           </div>
