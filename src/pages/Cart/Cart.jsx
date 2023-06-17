@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import { AppContext } from '../../Store/AppContext';
 import ProductTable from './ProductTable';
 import Container from "../../componenet/UI/Container"
 
 const Cart = () => {
     const { user,itemsOnTheCart } = useContext(AppContext);
+    const [subtotal,setSubtotal] = useState(undefined)
 
+   
+    useEffect(() =>{
+      const subtotalPrice = itemsOnTheCart.reduce((accumulator, currentItem) => accumulator + Number(currentItem.price), 0);
+      console.log(subtotalPrice)
+      setSubtotal(subtotalPrice)
+    },[itemsOnTheCart])
 
   console.log(itemsOnTheCart)
   return <>
@@ -22,7 +29,7 @@ const Cart = () => {
             <h2 className='text-lg font-semibold'>Subtotal</h2>
             <p className='text-smalltextcolor w-[80%]'>taxes and shipping will calculate in checkout</p>
           </div>
-          <h1 className='text-xl font-bold text-primarycolor'>$0</h1>
+          <h1 className='text-xl font-bold text-primarycolor'>${subtotal}</h1>
         </div>
         <div className='flex flex-col mt-4 sm:w-[80%]  lg:w-full sm:mx-auto'>
           <button className='bg-primarycolor my-2 text-white p-2 rounded-md'>Checkout</button>
