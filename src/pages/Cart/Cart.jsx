@@ -16,10 +16,10 @@ const Cart = () => {
       { !user &&  <h3 className='text-primarycolor text-lg'>please login to add item to cart</h3>}
       { user &&  itemsOnTheCart.length === 0  && <h3 className='text-primarycolor text-lg'>no item added to cart</h3>}
       { user && <ProductTable />}
-      <div className='mt-6'>
-        <div className='flex justify-between items-center'>
+      <div className='mt-10'>
+        <div className='flex justify-between '>
           <div >
-            <h2>Subtotal</h2>
+            <h2 className='text-lg font-semibold'>Subtotal</h2>
             <p className='text-smalltextcolor w-[80%]'>taxes and shipping will calculate in checkout</p>
           </div>
           <h1 className='text-xl font-bold text-primarycolor'>$0</h1>

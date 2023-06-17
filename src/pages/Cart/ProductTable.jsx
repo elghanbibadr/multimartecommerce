@@ -31,11 +31,11 @@ const ProductTable = ({productName,price,img}) => {
     return (
         <table className=' w-full'>
             <thead className=' '>
-                <tr className='flex justify-between w-full '>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Qty</th>
+                <tr className='flex justify-between  w-full '>
+                    <th >Image</th>
+                    <th className='max-w-[60px]'>Title</th>
+                    <th  className='max-w-[60px]'>Price</th>
+                    <th  className='max-w-[60px]'>Qty</th>
                     <th>delete</th>
                 </tr>
             </thead>
@@ -44,13 +44,13 @@ const ProductTable = ({productName,price,img}) => {
            return  <tbody className='flex justify-between  text-sm'>
             <tr className='flex  justify-between  w-full  items-center'>
                 <td><img className='h-10 w-10' src={imgUrl} alt='product item' /></td>
-                <td className=''>
-                    <p className='' > {productName}</p>
+                <td className='max-w-[60px]'>
+                    <p > {productName}</p>
                 </td>
-                <td >
+                <td  className='max-w-[60px]' >
                     <p>${price}</p>
                 </td>
-                <td >
+                <td  className='w-[60px]' >
                     <p>1px</p>
                 </td>
                 <td>
@@ -59,7 +59,6 @@ const ProductTable = ({productName,price,img}) => {
                     </svg>
                 </td>
             </tr>
-
             </tbody>
             })
              }
