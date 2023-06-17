@@ -24,6 +24,10 @@ const Cart = () => {
           </div>
           <h1 className='text-xl font-bold text-primarycolor'>$0</h1>
         </div>
+        <div className='flex flex-col mt-4'>
+          <button className='bg-primarycolor my-2 text-white p-2 rounded-md'>Checkout</button>
+          <button className='bg-primarycolor text-white p-2 rounded-md'>Continue Shopping</button>
+        </div>
       </div>
     </Container>
   </div>;
