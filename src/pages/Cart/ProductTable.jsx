@@ -31,7 +31,7 @@ const ProductTable = ({productName,price,img}) => {
     return (
         <table className=' w-full'>
             <thead className=' '>
-                <tr className='flex justify-between  w-full '>
+                <tr className='flex justify-between border-b border-[#ccc] pb-3  w-full '>
                     <th >Image</th>
                     <th className='max-w-[60px]'>Title</th>
                     <th  className='max-w-[60px]'>Price</th>
@@ -41,9 +41,9 @@ const ProductTable = ({productName,price,img}) => {
             </thead>
             {itemsOnTheCart.length > 0 &&  itemsOnTheCart.map(({productName,price,imgUrl},index)=>{
 
-           return  <tbody className='flex justify-between  text-sm'>
-            <tr className='flex  justify-between  w-full  items-center'>
-                <td><img className='h-10 w-10' src={imgUrl} alt='product item' /></td>
+           return  <tbody key={index} className='flex justify-between  text-sm'>
+            <tr className='flex  justify-between py-3 border-b border-[#ccc]  w-full  items-center'>
+                <td><img className='h-10 w-10 ' src={imgUrl} alt='product item' /></td>
                 <td className='max-w-[60px]'>
                     <p > {productName}</p>
                 </td>
