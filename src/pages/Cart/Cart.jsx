@@ -27,7 +27,7 @@ const Cart = () => {
         <div className='flex justify-between '>
           <div >
             <h2 className='text-lg font-semibold'>Subtotal</h2>
-            <p className='text-smalltextcolor w-[80%]'>taxes and shipping will calculate in checkout</p>
+            <p className='text-smalltextcolor mt-4 w-[80%]'>taxes and shipping will calculate in checkout</p>
           </div>
           <h1 className='text-xl font-bold text-primarycolor'>${subtotal}</h1>
         </div>
