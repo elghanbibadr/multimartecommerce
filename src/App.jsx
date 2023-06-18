@@ -6,9 +6,10 @@ import Cart from './pages/Cart/Cart';
 import Shop from './pages/Shop/Shop';
 import Navbar from './componenet/Navbar';
 import SignUp from './pages/SignUp/SignUp';
-
+import userFilterProductByCategory from './hook/useFilterProductByCatgory';
 
 const App = () => {
+  
   return (
     <>
         <Navbar />
