@@ -53,13 +53,26 @@ function CountDown() {
   const seconds = Math.floor((countdown / 1000) % 60);
 
   return (
-    <div>
-      <h2>Offer Countdown:</h2>
-      <p>
-        {hours.toString().padStart(2, "0")}:
-        {minutes.toString().padStart(2, "0")}:
-        {seconds.toString().padStart(2, "0")}
-      </p>
+    <div className="bg-primarycolor text-white">
+       <p>limited Offers</p>
+      <h3>Quality Armchair</h3>
+      <div className="flex gap-6">
+        <div>
+            <h2>{hours.toString().padStart(2, "0")}</h2>
+            <h5>Hours</h5>
+        </div>
+        
+        <div>
+            <h2>{minutes.toString().padStart(2, "0")}</h2>
+            <h5>Minutes</h5>
+        </div>
+        
+        <div>
+            <h2>{seconds.toString().padStart(2, "0")}</h2>
+            <h5>Seconds</h5>
+        </div>
+        
+      </div>
     </div>
   );
 }
