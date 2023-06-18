@@ -23,13 +23,13 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
   return (
     <>
 
-      {productName && <div className='max-w-[340px] '>
+      {productName && <div className='   '>
         <img className=' w-[80%]  ' src={imgUrl} alt="product image" />
         <h3 className='text-primarycolor text-[1rem] font-medium'>{productName}</h3>
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
         <div className='flex justify-between items-center '>
-          <h6 className='text-[1.1rem] text-primarycolor font-semibold'>${price}</h6>
-          <div onClick={ handleProductAddedToCart} className='bg-primarycolor cursor-pointer  h-[30px] mr-10 w-[30px] text-white  text-lg text-center rounded-full'>
+          <h6 className='text-[1.1rem] text-primarycolor font-semibold '>${price}</h6>
+          <div onClick={ handleProductAddedToCart} className='bg-primarycolor mr-20 cursor-pointer  h-[24px]  w-[24px] text-white  text-sm text-center flex items-center justify-center rounded-full'>
             +
           </div>
         </div>
