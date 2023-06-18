@@ -55,12 +55,10 @@ function CountDown() {
   const seconds = Math.floor((countdown / 1000) % 60);
 
   return (
-    <>
-     <h2 className="text-2xl font-medium text-center my-6 text-primarycolor">Best Sales</h2>
     <div className="bg-primarycolor text-white">
-       <Container className="flex  flex-col items-center text-center py-8">
+       <Container className="flex  flex-col items-center text-center py-8 md:flex-row md:text-left md:justify-between">
            <div>
-               <p>limited Offers</p>
+               <p className="mb-3">limited Offers</p>
                      <h3 className="text-xl">Quality Armchair</h3>
                      <div className="flex gap-6  my-5">
                 <div>
@@ -86,7 +84,6 @@ function CountDown() {
            </div>
        </Container>
     </div>
-    </>
   );
 }
 

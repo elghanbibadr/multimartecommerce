@@ -15,4 +15,8 @@ img{
     input {
         @apply  p-2 rounded-md w-[80%] mb-3 text-primarycolor
     }
+
+    p {
+        @apply text-[1.1rem] 
+    }
 }
