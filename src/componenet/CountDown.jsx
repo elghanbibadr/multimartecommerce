@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Container from "./UI/Container";
 
 function CountDown() {
   const [countdown, setCountdown] = useState(0);
@@ -53,27 +54,33 @@ function CountDown() {
   const seconds = Math.floor((countdown / 1000) % 60);
 
   return (
+    <>
+     <h2 className="text-2xl font-medium text-center my-6 text-primarycolor">Best Sales</h2>
     <div className="bg-primarycolor text-white">
-       <p>limited Offers</p>
-      <h3>Quality Armchair</h3>
-      <div className="flex gap-6">
-        <div>
-            <h2>{hours.toString().padStart(2, "0")}</h2>
-            <h5>Hours</h5>
-        </div>
-        
-        <div>
-            <h2>{minutes.toString().padStart(2, "0")}</h2>
-            <h5>Minutes</h5>
-        </div>
-        
-        <div>
-            <h2>{seconds.toString().padStart(2, "0")}</h2>
-            <h5>Seconds</h5>
-        </div>
-        
-      </div>
+       <Container>
+           <p>limited Offers</p>
+                 <h3 className="text-xl">Quality Armchair</h3>
+                 <div className="flex gap-6  my-5">
+            <div>
+                <h2 className="text-2xl">{hours.toString().padStart(2, "0")}</h2>
+                <h5>Hours</h5>
+            </div>
+           
+            <div>
+                <h2 className="text-2xl">{minutes.toString().padStart(2, "0")}</h2>
+                <h5>Minutes</h5>
+            </div>
+           
+            <div>
+                <h2 className="text-2xl">{seconds.toString().padStart(2, "0")}</h2>
+                <h5>Seconds</h5>
+            </div>
+            
+                 </div>
+                 <button className="bg-white text-primarycolor p-2 rounded-md font-medium">visit store</button>
+       </Container>
     </div>
+    </>
   );
 }
 
