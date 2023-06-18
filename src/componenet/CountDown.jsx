@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import countertimerimg from "../data/images/counter-timer-img.png";
 import Container from "./UI/Container";
 
 function CountDown() {
@@ -57,27 +58,32 @@ function CountDown() {
     <>
      <h2 className="text-2xl font-medium text-center my-6 text-primarycolor">Best Sales</h2>
     <div className="bg-primarycolor text-white">
-       <Container>
-           <p>limited Offers</p>
-                 <h3 className="text-xl">Quality Armchair</h3>
-                 <div className="flex gap-6  my-5">
-            <div>
-                <h2 className="text-2xl">{hours.toString().padStart(2, "0")}</h2>
-                <h5>Hours</h5>
-            </div>
-           
-            <div>
-                <h2 className="text-2xl">{minutes.toString().padStart(2, "0")}</h2>
-                <h5>Minutes</h5>
-            </div>
-           
-            <div>
-                <h2 className="text-2xl">{seconds.toString().padStart(2, "0")}</h2>
-                <h5>Seconds</h5>
-            </div>
-            
-                 </div>
-                 <button className="bg-white text-primarycolor p-2 rounded-md font-medium">visit store</button>
+       <Container className="flex  flex-col items-center text-center py-8">
+           <div>
+               <p>limited Offers</p>
+                     <h3 className="text-xl">Quality Armchair</h3>
+                     <div className="flex gap-6  my-5">
+                <div>
+                    <h2 className="text-2xl">{hours.toString().padStart(2, "0")}</h2>
+                    <h5>Hours</h5>
+                </div>
+               
+                <div>
+                    <h2 className="text-2xl">{minutes.toString().padStart(2, "0")}</h2>
+                    <h5>Minutes</h5>
+                </div>
+               
+                <div>
+                    <h2 className="text-2xl">{seconds.toString().padStart(2, "0")}</h2>
+                    <h5>Seconds</h5>
+                </div>
+               
+                     </div>
+                     <button className="bg-white text-primarycolor p-2 rounded-md font-medium">visit store</button>
+           </div>
+           <div className="mt-6">
+            <img src={countertimerimg} alt="couch image " />
+           </div>
        </Container>
     </div>
     </>
