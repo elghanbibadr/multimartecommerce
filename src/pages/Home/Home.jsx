@@ -4,6 +4,7 @@ import Features from "../../componenet/Features";
 import NewArrivals from "../../componenet/NewArrivals";
 import CountDown from "../../componenet/CountDown";
 import BestSales from "../../componenet/BestSales";
+import PopularInCategory from "../../componenet/PopularInCategory";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
     <BestSales />
     <CountDown />
     <NewArrivals />
+    <PopularInCategory/>
     </>
   )
 }
