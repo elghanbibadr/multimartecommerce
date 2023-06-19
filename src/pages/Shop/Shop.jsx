@@ -20,25 +20,10 @@ const Shop = () => {
       <h1 className='text-white font-bold text-center my-6'>Products</h1>
     </div>
     <Container>
-      {/* <form>
-        <select className='capitalize'>
-          <option value="">filter by category</option>
-          <option value="">sofa</option>
-          <option value="">mobile</option>
-          <option value="">chair</option>
-          <option value="">watch</option>
-          <option value="">wireless</option>
-        </select>
-        <select>
-          <option value="">Sort by</option>
-          <option value="">Ascending</option>
-          <option value="">Descending</option>
-        
-        </select>
-      </form> */}
+     {/* dropdown 1 */}
        <div className='dropdown'>
       <div className='dropdown-header' onClick={toggleDropdown}>
-        {selectedItem ? items.find(item => item.id == selectedItem).label : "Filter byCategory"}
+        {selectedItem ? items.find(item => item.id == selectedItem).label : "Filter By Category"}
         <img src={chevronIcon}  className={` h-3 icon ${isOpen && "open"}`}/>
       </div>
       <div className={`dropdown-body ${isOpen && 'open'}`}>
@@ -50,6 +35,8 @@ const Shop = () => {
         ))}
       </div>
     </div>
+     {/* dropdown 1 */}
+      
     </Container>
     </>
   )
