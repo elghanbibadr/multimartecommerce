@@ -2,7 +2,7 @@ import React ,{useState} from 'react'
 import Container from '../../componenet/UI/Container'
 import chevronIcon from "../../assets/chevron-right-solid.svg"
 const Shop = () => {
-  const data = [{id: 0, label: "Istanbul, TR (AHL)"}, {id: 1, label: "Paris, FR (CDG)"}];
+  const data = [ {id: 1, label: "sofa"},{id: 2, label: "mobile"},{id: 3, label: "chair"},{id: 4, label: "watch"},{id: 5, label: "wireless"}];
   const [isOpen, setOpen] = useState(false);
   const [items, setItem] = useState(data);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -38,7 +38,7 @@ const Shop = () => {
       </form> */}
        <div className='dropdown'>
       <div className='dropdown-header' onClick={toggleDropdown}>
-        {selectedItem ? items.find(item => item.id == selectedItem).label : "Select your destination"}
+        {selectedItem ? items.find(item => item.id == selectedItem).label : "Filter byCategory"}
         <img src={chevronIcon}  className={` h-3 icon ${isOpen && "open"}`}/>
       </div>
       <div className={`dropdown-body ${isOpen && 'open'}`}>
