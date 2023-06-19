@@ -1,21 +1,19 @@
 import Hero from "../../componenet/Hero"
-import TrendingProducts from "../../componenet/TrendingProducts"
 import Features from "../../componenet/Features";
-import NewArrivals from "../../componenet/NewArrivals";
 import CountDown from "../../componenet/CountDown";
-import BestSales from "../../componenet/BestSales";
-import PopularInCategory from "../../componenet/PopularInCategory";
+import ProductsShowsUp from "../../componenet/UI/ProductsShowsUp"
+
 
 const Home = () => {
   return (
     <>
     <Hero/>
     <Features />
-    <TrendingProducts />
-    <BestSales />
+    <ProductsShowsUp category="chair" sectionTitle="Trending Products" />
+    <ProductsShowsUp category="sofa" sectionTitle="Best Sales" />
     <CountDown />
-    <NewArrivals />
-    <PopularInCategory/>
+    <ProductsShowsUp category="mobile" category2='wireless' sectionTitle="New Arrivals" />
+    <ProductsShowsUp category="watch"  sectionTitle="Popular in Category" />
     </>
   )
 }
