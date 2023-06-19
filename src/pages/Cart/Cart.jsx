@@ -14,7 +14,6 @@ const Cart = () => {
       setSubtotal(subtotalPrice)
     },[itemsOnTheCart])
 
-  console.log(itemsOnTheCart)
   return <>
     <div className='bg-primarycolor p-3'>
       <h1 className='text-white font-bold text-center my-6'>Shopping Cart</h1>
