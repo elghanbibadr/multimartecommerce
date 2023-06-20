@@ -22,6 +22,10 @@ const Shop = () => {
   }
 
   useEffect(() =>{
+    if (!selectedItem){
+      setProductsToBeShown(sortedProducts)
+      return
+    }
     if (selectedItem && productsToBeShown){
       const userChoice=  data.find((a) =>a.id ==selectedItem)
       setSelectedCategory(userChoice.label)
