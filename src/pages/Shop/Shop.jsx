@@ -1,12 +1,17 @@
-import React ,{useState} from 'react'
+import React ,{useContext, useState} from 'react'
 import Container from '../../componenet/UI/Container'
 import chevronIcon from "../../assets/chevron-right-solid.svg"
+import { AppContext } from '../../Store/AppContext';
+import ProductItem from "../../componenet/UI/ProductItem";
+
 const Shop = () => {
+   
   const data = [ {id: 1, label: "sofa"},{id: 2, label: "mobile"},{id: 3, label: "chair"},{id: 4, label: "watch"},{id: 5, label: "wireless"}];
   const [isOpen, setOpen] = useState(false);
   const [items, setItem] = useState(data);
   const [selectedItem, setSelectedItem] = useState(null);
-  
+  const {products}=useContext(AppContext)
+  console.log(products)
   const toggleDropdown = () => setOpen(!isOpen);
   
   const handleItemClick = (id) => {
@@ -20,7 +25,7 @@ const Shop = () => {
       <h1 className='text-white font-bold text-center my-6'>Products</h1>
     </div>
     <Container>
-     {/* dropdown 1 */}
+     {/*header*/}
        <div className='md:flex md:justify-between '>
          <div className='dropdown md:w-[300px]'>
                <div className='dropdown-header' onClick={toggleDropdown}>
@@ -46,7 +51,15 @@ const Shop = () => {
                </div>
              </form>
        </div>
-      
+       {/* products section */}
+       {products && products.map(({ id, item }) =>{
+        {console.log(item)}
+      return    <ProductItem key={id}
+        category={item.category}
+        productName={item.productName}
+        price={item.price}
+        imgUrl={item.imgUrl} />
+       })}
     </Container>
     </>
   )
