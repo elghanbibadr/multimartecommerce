@@ -9,15 +9,28 @@ const Shop = () => {
   const data = [ {id: 1, label: "sofa"},{id: 2, label: "mobile"},{id: 3, label: "chair"},{id: 4, label: "watch"},{id: 5, label: "wireless"}];
   const [isOpen, setOpen] = useState(false);
   const [items, setItem] = useState(data);
+  const [selectedCategory, setSelectedCategory] = useState(undefined)
+  const [productsToBeShown,setProductsToBeShown]=useState()
   const [selectedItem, setSelectedItem] = useState(null);
   const {products}=useContext(AppContext)
-  console.log(products)
+
   const toggleDropdown = () => setOpen(!isOpen);
   
   const handleItemClick = (id) => {
-    selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
+    setSelectedItem(id)
+   
   }
+  
+  useEffect(() =>{
+    if (selectedItem && productsToBeShown){
+      const userChoice=  data.find((a) =>a.id ==selectedItem)
+      setSelectedCategory(userChoice)
+       // productsToBeShown.filter(product =>prod)
+     }
+  },[selectedItem])
 
+  console.log(selectedItem)
+  console.log(selectedCategory)
   const categoryOrder = ['sofa', 'mobile', 'wireless', 'chair'];
 
 // Sort the products array by category
@@ -36,7 +49,12 @@ const Shop = () => {
     return 0; // No sorting required for other categories
   });
 
+  useEffect(() =>{
+   return () => setProductsToBeShown(sortedProducts)
+  },[sortedProducts])
+
   return (
+
 
     <>
     <div className='bg-primarycolor p-3'>
@@ -71,7 +89,7 @@ const Shop = () => {
        </div>
        {/* products section */}
        <div className='sm:grid mt-10 sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
-         {products && sortedProducts.map(({ id, item }) =>{
+         {sortedProducts.length !==0 && productsToBeShown  && productsToBeShown.map(({ id, item }) =>{
          return  <ProductItem key={id}
           category={item.category}
           productName={item.productName}
