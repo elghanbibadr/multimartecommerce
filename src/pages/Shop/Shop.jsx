@@ -1,4 +1,4 @@
-import React ,{useContext, useState} from 'react'
+import React ,{useContext, useEffect, useState} from 'react'
 import Container from '../../componenet/UI/Container'
 import chevronIcon from "../../assets/chevron-right-solid.svg"
 import { AppContext } from '../../Store/AppContext';
@@ -17,7 +17,25 @@ const Shop = () => {
   const handleItemClick = (id) => {
     selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
   }
+
+  const categoryOrder = ['sofa', 'mobile', 'wireless', 'chair'];
+
+// Sort the products array by category
+  const sortedProducts = products.sort((a, b) => {
+    const categoryA = categoryOrder.indexOf(a.item.category);
+    const categoryB = categoryOrder.indexOf(b.item.category);
+    if (categoryA !== categoryB) {
+      return categoryA - categoryB;
+    }
   
+    // For Sofa items, sort by price
+    if (a.item.category === 'sofa') {
+      return b.item.price - a.item.price;
+    }
+  
+    return 0; // No sorting required for other categories
+  });
+
   return (
 
     <>
@@ -52,14 +70,15 @@ const Shop = () => {
              </form>
        </div>
        {/* products section */}
-       {products && products.map(({ id, item }) =>{
-        {console.log(item)}
-      return    <ProductItem key={id}
-        category={item.category}
-        productName={item.productName}
-        price={item.price}
-        imgUrl={item.imgUrl} />
-       })}
+       <div className='sm:grid mt-10 sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
+         {products && sortedProducts.map(({ id, item }) =>{
+         return  <ProductItem key={id}
+          category={item.category}
+          productName={item.productName}
+          price={item.price}
+          imgUrl={item.imgUrl} />
+         })}
+       </div>
     </Container>
     </>
   )
