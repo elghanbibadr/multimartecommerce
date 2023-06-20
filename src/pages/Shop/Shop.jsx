@@ -20,14 +20,14 @@ const Shop = () => {
     setSelectedItem(id)
    
   }
-  
+
   useEffect(() =>{
     if (selectedItem && productsToBeShown){
       const userChoice=  data.find((a) =>a.id ==selectedItem)
-      setSelectedCategory(userChoice)
-       // productsToBeShown.filter(product =>prod)
+      setSelectedCategory(userChoice.label)
+      setProductsToBeShown (products.filter(product=>product.item.category === selectedCategory))
      }
-  },[selectedItem])
+  },[selectedCategory,selectedItem])
 
   console.log(selectedItem)
   console.log(selectedCategory)
