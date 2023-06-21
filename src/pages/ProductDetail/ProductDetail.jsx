@@ -18,12 +18,14 @@ const ProductDetail = () => {
           <div>
             <p className='my-4 '><span className='text-orange-400'>({currentProduct.item.avgRating}) </span>ratings</p>
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between my-3'>
             <h3 className='text-xl font-semibold'>${currentProduct.item.price}</h3>
             <p className=''>Category: {currentProduct.item.category}</p>
           </div>
           <p className='text-smalltextcolor'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla, eaque.</p>
+        <button className='capitalize bg-primarycolor text-white py-3 px-6 rounded-md font-medium mt-4'>Add to Cart</button>
         </div>
+
        </div>
      </Container>}
     </>
