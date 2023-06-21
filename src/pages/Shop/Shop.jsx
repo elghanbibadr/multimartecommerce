@@ -99,6 +99,7 @@ const Shop = () => {
           </form>
         </div>
         {/* products section */}
+        { productsToBeShown && searchCriteria &&  productsToBeShown.length ===0 &&  <h1 className='text-center mt-10'>product not found</h1>}
         <div className='sm:grid mt-10 sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
           {sortedProducts.length !== 0 && productsToBeShown && productsToBeShown.map(({ id, item }) => {
             return <ProductItem key={id}
