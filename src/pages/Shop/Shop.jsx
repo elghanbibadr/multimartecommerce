@@ -55,7 +55,7 @@ const Shop = () => {
   });
 
   useEffect(() => {
-    return () => setProductsToBeShown(sortedProducts)
+    setProductsToBeShown(sortedProducts)
   }, [sortedProducts])
 
   useEffect(() =>{
