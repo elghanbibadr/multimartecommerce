@@ -36,12 +36,12 @@ const ProductDetail = () => {
           <h4 onClick={handleDescriptionClicked} className={`${isDescriptionActive ? "text-primarycolor" :"text-[#111]"} cursor-pointer`}>Description</h4>
           <h4 onClick={handleReviewsClicked} className={`${!isDescriptionActive ? "text-primarycolor" :"text-[#111]"} ml-6 cursor-pointer`}>Reviews ({currentProduct.item.reviews.length})</h4>
          </div>
-          { isDescriptionActive &&  <p className='mt-6 text-smalltextcolor' > {currentProduct.item.description} </p> }
+          { isDescriptionActive &&  <p className='mt-6 text-smalltextcolor text-base' > {currentProduct.item.description} </p> }
           { !isDescriptionActive && currentProduct.item.reviews.map(({text,rating}) =>{
             return  <div className='mt-6'>
                <h4 className='text-[1.2rem] text-[#111]'>John Doe</h4>
                <p className='text-orange-400'> {rating} (rating) </p>
-               <p className='text-smalltextcolor mt-2'>{text}</p>
+               <p className='text-smalltextcolor  mt-2'>{text}</p>
             </div>
           } ) 
            
