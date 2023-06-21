@@ -3,25 +3,26 @@ import { useParams } from 'react-router-dom';
 import Container from '../../componenet/UI/Container';
 import { AppContext } from '../../Store/AppContext';
 const ProductDetail = () => {
-    const { productName } = useParams();
+    const { id} = useParams();
     const [isDescriptionActive,setIsDescriptionActive]=useState(false)
     const { products}=useContext(AppContext)
 
+    console.log(id)
     const handleDescriptionClicked=() => setIsDescriptionActive(true)
     const handleReviewsClicked=() => setIsDescriptionActive(false)
-  const currentProduct =products.find(({id,item}) => item.productName ===productName)
+  const currentProduct =products.find((product) => product.id ===id)
   console.log(currentProduct)
   return (
     <>
     { currentProduct &&  <Container>
-       <div className="grid grid-cols-1  justify-items-center text-[#111]">
-        <img className='' src={currentProduct.item.imgUrl} alt="product image" />
-        <div className=''>
+       <div className="grid grid-cols-1  text-[#111] md:grid-cols-2 ">
+        <img className='max-w-[400px]  justify-self-center lg:w-full' src={currentProduct.item.imgUrl} alt="product image" />
+        <div className='self-center'>
           <h1 className=' font-medium text-xl'>{currentProduct.item.productName}</h1>
           <div>
             <p className='my-4 '><span className='text-orange-400'>({currentProduct.item.avgRating}) </span>ratings</p>
           </div>
-          <div className='flex justify-between my-3'>
+          <div className='flex justify-between sm:w-1/2 my-3'>
             <h3 className='text-xl font-semibold'>${currentProduct.item.price}</h3>
             <p className=''>Category: {currentProduct.item.category}</p>
           </div>
