@@ -5,7 +5,7 @@ import { doc, updateDoc, getDoc, setDoc } from 'firebase/firestore'
 import { AppContext } from '../../Store/AppContext'
 
 const ProductItem = ({ category, productName, imgUrl, price }) => {
-  const { user, setItemsOnTheCart,itemsOnTheCart} = useContext(AppContext)
+  const { user, setItemsOnTheCart} = useContext(AppContext)
 
   const handleProductAddedToCart = async () => {
     console.log(user)

@@ -21,6 +21,7 @@ const ProductsShowsUp = ({ category, category2, sectionTitle }) => {
         <Container className='sm:grid sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
           {productsInThisSection.sort((a, b) => b.item.price - a.item.price).map(({ id, item }) => (
             <ProductItem
+            id={id}
               key={id}
               category={item.category}
               productName={item.productName}
