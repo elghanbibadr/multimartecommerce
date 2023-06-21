@@ -1,12 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 const ProductDetail = () => {
-    const { id } = useParams();
+    const { productName } = useParams();
 
-    console.log(id)
 
   return (
-    <div>PorductDetail</div>
+    <h1 className='text-black text-xl'>{productName}</h1>
   )
 }
 

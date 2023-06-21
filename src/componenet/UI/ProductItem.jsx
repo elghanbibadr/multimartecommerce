@@ -1,10 +1,8 @@
-import React, { useContext, useId } from 'react'
-import item from "../../data/images/arm-chair-01.jpg"
-import { db } from '../../../firebaseConfig'
-import { doc, updateDoc, getDoc, setDoc } from 'firebase/firestore'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { AppContext } from '../../Store/AppContext'
 
-const ProductItem = ({ category, productName, imgUrl, price }) => {
+const ProductItem = ({ id,category, productName, imgUrl, price }) => {
   const { user, setItemsOnTheCart} = useContext(AppContext)
 
   const handleProductAddedToCart = async () => {
@@ -23,7 +21,7 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
   return (
     <>
 
-      {productName && <div className='   '>
+      {productName && <Link to={`${productName}`}>
         <img className=' w-[80%]  ' src={imgUrl} alt="product image" />
         <h3 className='text-primarycolor text-[1rem] font-medium'>{productName}</h3>
         <p className='text-smalltextcolor my-[8px] font-medium'>{category}</p>
@@ -33,7 +31,7 @@ const ProductItem = ({ category, productName, imgUrl, price }) => {
             +
           </div>
         </div>
-      </div>
+      </Link>
 
       }
     </>
