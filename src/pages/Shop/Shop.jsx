@@ -75,7 +75,8 @@ const Shop = () => {
         <div className='md:flex md:justify-between '>
           <div className='dropdown md:w-[300px]'>
             <div className='dropdown-header' onClick={toggleDropdown}>
-              {selectedItem ? items.find(item => item.id == selectedItem).label : "Filter By Category"}
+              <p>Filter By Category</p>
+              {/* {selectedItem ? items.find(item => item.id == selectedItem).label : "Filter By Category"} */}
               <img src={chevronIcon} className={` h-3 icon ${isOpen && "open"}`} />
             </div>
             <div className={`dropdown-body ${isOpen && 'open'}`}>
