@@ -7,6 +7,8 @@ const ProductDetail = () => {
     const [isDescriptionActive,setIsDescriptionActive]=useState(false)
     const { products}=useContext(AppContext)
 
+    const handleDescriptionClicked=() => setIsDescriptionActive(true)
+    const handleReviewsClicked=() => setIsDescriptionActive(false)
   const currentProduct =products.find(({id,item}) => item.productName ===productName)
   console.log(currentProduct)
   return (
@@ -31,10 +33,10 @@ const ProductDetail = () => {
        {/* reviews and desc */}
        <div>
          <div className='mt-8 flex font-medium  '>
-          <h4 className='cursor-pointer'>Description</h4>
-          <h4 className='ml-6 cursor-pointer'>Reviews ({currentProduct.item.reviews.length})</h4>
+          <h4 onClick={handleDescriptionClicked} className={`${isDescriptionActive ? "text-primarycolor" :"text-[#111]"} cursor-pointer`}>Description</h4>
+          <h4 onClick={handleReviewsClicked} className={`${!isDescriptionActive ? "text-primarycolor" :"text-[#111]"} ml-6 cursor-pointer`}>Reviews ({currentProduct.item.reviews.length})</h4>
          </div>
-          { isDescriptionActive &&  <p className='mt-6 text-smalltextcolor'> {currentProduct.item.description} </p> }
+          { isDescriptionActive &&  <p className='mt-6 text-smalltextcolor' > {currentProduct.item.description} </p> }
           { !isDescriptionActive && currentProduct.item.reviews.map(({text,rating}) =>{
             return  <div className='mt-6'>
                <h4 className='text-[1.2rem] text-[#111]'>John Doe</h4>
