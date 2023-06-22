@@ -102,9 +102,9 @@ const ProductDetail = () => {
             <div className='p-5'>
               <h3>Leave your experience</h3>
               <form onSubmit={handleReviewSubmited} className='flex flex-col'>
-              <input className='border-[1px]  border-black w-1/2 ' placeholder='enter your name' type="text" value={userName} onChange={handleNameEntered} />
+              <input className='border-[1px] mt-5  border-black w-1/2 ' placeholder='enter your name' type="text" value={userName} onChange={handleNameEntered} />
               <input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} placeholder='your review' onChange={handleReviewAdded} />
-              <button>add review</button>
+              <button className='capitalize w-fit bg-primarycolor text-white py-3 px-6 rounded-md font-medium mt-4'>Add Review</button>
               </form>
             </div>
           </div>
