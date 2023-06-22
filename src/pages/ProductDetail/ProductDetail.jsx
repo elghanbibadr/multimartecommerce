@@ -16,6 +16,10 @@ const ProductDetail = () => {
   const handleReviewAdded= (e) =>setUserReview(e.target.value) 
   const handleReviewSubmited=async (e) =>{
     e.preventDefault()
+    if (!userReviews){
+      alert('please add a review')
+      return 
+    }
     addReview(id,userReviews)
     setUserReview('')
 
@@ -36,12 +40,11 @@ const ProductDetail = () => {
         // Update the product document with the updated reviews array
         await updateDoc(productRef, { reviews: updatedReviews });
         
-        console.log('Review added successfully!');
       } else {
-        console.log('Product does not exist.');
+        alert('Product does not exist.');
       }
     } catch (error) {
-      console.error('Error adding review:', error);
+      alert('Error adding review:', error);
     }
   };
   
