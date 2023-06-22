@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [isDescriptionActive, setIsDescriptionActive] = useState(false)
   const [userReviews, setUserReview] = useState('')
+  const [userName, setUserName] = useState('')
   const [relatedProducts, setRelatedProducts] = useState(undefined);
   const { products } = useContext(AppContext)
   const handleDescriptionClicked = () => setIsDescriptionActive(true)
@@ -25,10 +26,12 @@ const ProductDetail = () => {
   }, [currentProduct])
 
   const handleReviewAdded = (e) => setUserReview(e.target.value)
+  const handleNameEntered = (e) => setUserName(e.target.value)
+
   const handleReviewSubmited = async (e) => {
     e.preventDefault()
-    if (!userReviews) {
-      alert('please add a review')
+    if (!userReviews || !userName) {
+      alert('please fill out all the required fields')
       return
     }
     addReview(id, userReviews)
@@ -97,7 +100,10 @@ const ProductDetail = () => {
             })}
             <div className='p-5'>
               <h3>Leave your experience</h3>
-              <form onSubmit={handleReviewSubmited}><input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} onChange={handleReviewAdded} /></form>
+              <form onSubmit={handleReviewSubmited} className='flex flex-col'>
+              <input className='border-[1px]  border-black w-1/2 ' placeholder='enter your name' type="text" value={userName} onChange={handleNameEntered} />
+              <input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} placeholder='your review' onChange={handleReviewAdded} />
+              </form>
             </div>
           </div>
           }
