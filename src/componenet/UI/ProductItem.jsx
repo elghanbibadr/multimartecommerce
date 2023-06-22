@@ -14,7 +14,6 @@ const ProductItem = ({ id,category, productName, imgUrl, price }) => {
     const addedProduct = { productName: productName, price: price, category: category, imgUrl: imgUrl }
     setItemsOnTheCart (prv => [...prv ,addedProduct])   
   }
-console.log(id,"product")
   return (
     <>
 

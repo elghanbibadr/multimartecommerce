@@ -34,12 +34,14 @@ const ProductDetail = () => {
       alert('please fill out all the required fields')
       return
     }
-    addReview(id, userReviews)
+    addReview(id, userReviews,userName)
     setUserReview('')
+    setUserName('')
+    console.log('successfully')
 
   }
 
-  const addReview = async (productId, newReview) => {
+  const addReview = async (productId, newReview,nameOfUser) => {
     try {
       const productRef = doc(db, 'products', productId);
       const productSnapshot = await getDoc(productRef);
@@ -49,7 +51,7 @@ const ProductDetail = () => {
         const reviews = productData.reviews || []; // Existing reviews or empty array
 
         // Add the new review to the reviews array
-        const updatedReviews = [...reviews, { text: newReview, rating: 4.9 }];
+        const updatedReviews = [...reviews, { text: newReview, rating: 4.9,name:nameOfUser }];
 
         // Update the product document with the updated reviews array
         await updateDoc(productRef, { reviews: updatedReviews });
@@ -63,7 +65,6 @@ const ProductDetail = () => {
   };
 
 
-  console.log(relatedProducts)
   return (
     <>
       {currentProduct && <Container>
@@ -103,6 +104,7 @@ const ProductDetail = () => {
               <form onSubmit={handleReviewSubmited} className='flex flex-col'>
               <input className='border-[1px]  border-black w-1/2 ' placeholder='enter your name' type="text" value={userName} onChange={handleNameEntered} />
               <input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} placeholder='your review' onChange={handleReviewAdded} />
+              <button>add review</button>
               </form>
             </div>
           </div>
