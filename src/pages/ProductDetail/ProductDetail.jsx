@@ -77,9 +77,9 @@ const ProductDetail = () => {
           </div>
           {isDescriptionActive && <p className='mt-6 text-smalltextcolor text-base' > {currentProduct.item.description} </p>}
           {!isDescriptionActive && <div>
-            {currentProduct.item.reviews.map(({ text, rating },index) => {
+            {currentProduct.item.reviews.map(({ text, rating,name },index) => {
               return <div key={index} className='mt-6'>
-                <h4 className='text-[1.2rem] text-[#111]'>John Doe</h4>
+                <h4 className='text-[1.2rem] text-[#111]'>{name}</h4>
                 <p className='text-orange-400'> {rating} (rating) </p>
                 <p className='text-smalltextcolor  mt-2'>{text}</p>
               </div>
