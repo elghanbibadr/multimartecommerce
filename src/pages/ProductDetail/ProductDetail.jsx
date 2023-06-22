@@ -1,26 +1,36 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { getDoc,doc,updateDoc } from 'firebase/firestore';
+import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 import Container from '../../componenet/UI/Container';
+import ProductItem from '../../componenet/UI/ProductItem';
 import { AppContext } from '../../Store/AppContext';
+
+
 const ProductDetail = () => {
   const { id } = useParams();
   const [isDescriptionActive, setIsDescriptionActive] = useState(false)
-  const [userReviews, setUserReview]=useState('')
+  const [userReviews, setUserReview] = useState('')
+  const [relatedProducts, setRelatedProducts] = useState(undefined);
   const { products } = useContext(AppContext)
   const handleDescriptionClicked = () => setIsDescriptionActive(true)
   const handleReviewsClicked = () => setIsDescriptionActive(false)
   const currentProduct = products.find(product => product.id === id)
 
-  const handleReviewAdded= (e) =>setUserReview(e.target.value) 
-  const handleReviewSubmited=async (e) =>{
-    e.preventDefault()
-    if (!userReviews){
-      alert('please add a review')
-      return 
+  useEffect(() => {
+    if (currentProduct) {
+      setRelatedProducts(products.filter(({ id, item }) => item.category === currentProduct.item.category && currentProduct.id !==id))
     }
-    addReview(id,userReviews)
+  }, [currentProduct])
+
+  const handleReviewAdded = (e) => setUserReview(e.target.value)
+  const handleReviewSubmited = async (e) => {
+    e.preventDefault()
+    if (!userReviews) {
+      alert('please add a review')
+      return
+    }
+    addReview(id, userReviews)
     setUserReview('')
 
   }
@@ -29,17 +39,17 @@ const ProductDetail = () => {
     try {
       const productRef = doc(db, 'products', productId);
       const productSnapshot = await getDoc(productRef);
-      
+
       if (productSnapshot.exists()) {
         const productData = productSnapshot.data();
         const reviews = productData.reviews || []; // Existing reviews or empty array
-        
+
         // Add the new review to the reviews array
-        const updatedReviews = [...reviews,{text:newReview,rating:4.9}];
-  
+        const updatedReviews = [...reviews, { text: newReview, rating: 4.9 }];
+
         // Update the product document with the updated reviews array
         await updateDoc(productRef, { reviews: updatedReviews });
-        
+
       } else {
         alert('Product does not exist.');
       }
@@ -47,9 +57,9 @@ const ProductDetail = () => {
       alert('Error adding review:', error);
     }
   };
-  
 
-  console.log(userReviews)
+
+  console.log(relatedProducts)
   return (
     <>
       {currentProduct && <Container>
@@ -69,7 +79,7 @@ const ProductDetail = () => {
           </div>
 
         </div>
-            {/* reviews and desc */}
+        {/* reviews and desc */}
         <div>
           <div className='mt-8 flex font-medium  '>
             <h4 onClick={handleDescriptionClicked} className={`${isDescriptionActive ? "text-primarycolor" : "text-[#111]"} cursor-pointer`}>Description</h4>
@@ -77,20 +87,36 @@ const ProductDetail = () => {
           </div>
           {isDescriptionActive && <p className='mt-6 text-smalltextcolor text-base' > {currentProduct.item.description} </p>}
           {!isDescriptionActive && <div>
-            {currentProduct.item.reviews.map(({ text, rating,name },index) => {
+            {currentProduct.item.reviews.map(({ text, rating, name }, index) => {
               return <div key={index} className='mt-6'>
                 <h4 className='text-[1.2rem] text-[#111]'>{name}</h4>
                 <p className='text-orange-400'> {rating} (rating) </p>
                 <p className='text-smalltextcolor  mt-2'>{text}</p>
               </div>
             })}
-             <div className='p-5'>
-            <h3>Leave your experience</h3>
-            <form onSubmit={handleReviewSubmited}><input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} onChange={handleReviewAdded}  /></form>
-          </div>
+            <div className='p-5'>
+              <h3>Leave your experience</h3>
+              <form onSubmit={handleReviewSubmited}><input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} onChange={handleReviewAdded} /></form>
+            </div>
           </div>
           }
-         
+
+        </div>
+        {/* you might also like */}
+        <div>
+          <h3 className='mt-6'>You might also like</h3>
+          {relatedProducts && <div className='sm:grid justify-items-center sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
+             {relatedProducts.map(({ id, item }) => {
+              return <div className='w-[80%]'>
+                <ProductItem key={id}
+                  category={item.category}
+                  productName={item.productName}
+                  imgUrl={item.imgUrl}
+                  price={item.price}
+                />
+              </div>
+            })}
+          </div>}
         </div>
       </Container>}
     </>
