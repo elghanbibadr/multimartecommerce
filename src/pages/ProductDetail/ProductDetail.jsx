@@ -8,8 +8,7 @@ const ProductDetail = () => {
   const { products } = useContext(AppContext)
   const handleDescriptionClicked = () => setIsDescriptionActive(true)
   const handleReviewsClicked = () => setIsDescriptionActive(false)
-  const currentProduct = products.find((product) => product.id === id)
-
+  const currentProduct = products.find(product => product.id === id)
 
   return (
     <>

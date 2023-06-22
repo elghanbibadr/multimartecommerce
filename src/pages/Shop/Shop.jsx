@@ -103,6 +103,7 @@ const Shop = () => {
         <div className='sm:grid mt-10 sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
           {sortedProducts.length !== 0 && productsToBeShown && productsToBeShown.map(({ id, item }) => {
             return <ProductItem key={id}
+            id={id}
               category={item.category}
               productName={item.productName}
               price={item.price}
