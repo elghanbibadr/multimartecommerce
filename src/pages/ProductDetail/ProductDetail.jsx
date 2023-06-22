@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
+import { Link } from 'react-router-dom';
 import Container from '../../componenet/UI/Container';
 import ProductItem from '../../componenet/UI/ProductItem';
 import { AppContext } from '../../Store/AppContext';
@@ -107,8 +108,9 @@ const ProductDetail = () => {
           <h3 className='mt-6'>You might also like</h3>
           {relatedProducts && <div className='sm:grid justify-items-center sm:grid-cols-2 md:gap-10 lg:grid-cols-4'>
              {relatedProducts.map(({ id, item }) => {
-              return <div className='w-[80%]'>
+              return <div  className='w-[80%]'>
                 <ProductItem key={id}
+                id={id}
                   category={item.category}
                   productName={item.productName}
                   imgUrl={item.imgUrl}
