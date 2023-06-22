@@ -1,15 +1,52 @@
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { getDoc,doc,updateDoc } from 'firebase/firestore';
+import { db } from '../../../firebaseConfig';
 import Container from '../../componenet/UI/Container';
 import { AppContext } from '../../Store/AppContext';
 const ProductDetail = () => {
   const { id } = useParams();
   const [isDescriptionActive, setIsDescriptionActive] = useState(false)
+  const [userReviews, setUserReview]=useState('')
   const { products } = useContext(AppContext)
   const handleDescriptionClicked = () => setIsDescriptionActive(true)
   const handleReviewsClicked = () => setIsDescriptionActive(false)
   const currentProduct = products.find(product => product.id === id)
 
+  const handleReviewAdded= (e) =>setUserReview(e.target.value) 
+  const handleReviewSubmited=async (e) =>{
+    e.preventDefault()
+    addReview(id,userReviews)
+    setUserReview('')
+
+  }
+
+  const addReview = async (productId, newReview) => {
+    try {
+      const productRef = doc(db, 'products', productId);
+      const productSnapshot = await getDoc(productRef);
+      
+      if (productSnapshot.exists()) {
+        const productData = productSnapshot.data();
+        const reviews = productData.reviews || []; // Existing reviews or empty array
+        
+        // Add the new review to the reviews array
+        const updatedReviews = [...reviews,{text:newReview,rating:4.9}];
+  
+        // Update the product document with the updated reviews array
+        await updateDoc(productRef, { reviews: updatedReviews });
+        
+        console.log('Review added successfully!');
+      } else {
+        console.log('Product does not exist.');
+      }
+    } catch (error) {
+      console.error('Error adding review:', error);
+    }
+  };
+  
+
+  console.log(userReviews)
   return (
     <>
       {currentProduct && <Container>
@@ -45,7 +82,7 @@ const ProductDetail = () => {
             })}
              <div className='p-5'>
             <h3>Leave your experience</h3>
-            <input className='border-[1px]  border-black w-1/2 ' type="text" />
+            <form onSubmit={handleReviewSubmited}><input className='border-[1px]  border-black w-1/2 ' type="text" value={userReviews} onChange={handleReviewAdded}  /></form>
           </div>
           </div>
           }
